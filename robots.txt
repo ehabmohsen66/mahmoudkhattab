@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# No value in crawling these
+Disallow: /storage/
+Disallow: /contact.php
+Disallow: /config.php
+
+Sitemap: https://mahmoudkhattab.com/sitemap.xml

@@ -1,0 +1,37 @@
+# ---- Local secrets & runtime -------------------------------------------
+config.php
+storage/
+*.log
+
+# ---- OS / editor junk ---------------------------------------------------
+.DS_Store
+._*
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ---- Node (local dev server only; not used on cPanel) -------------------
+node_modules/
+npm-debug.log*
+
+# ---- Original camera / stock masters ------------------------------------
+# These are the 49 MB uncompressed sources. The web build lives in
+# assets/hero/ and is committed. Keep the masters out of the repo — clone
+# size goes from ~103 MB to ~25 MB and GitHub stays fast.
+desert-and-pyramids-*.jpg
+man-riding-rearing-white-horse-*.jpg
+nile-in-cairo-*.jpg
+a-young-tourist-jumping-*.jpg
+minimizing-vertical-view-*.jpg
+
+# ---- Unsorted source media dumped in the project root -------------------
+/WhatsApp Image *
+/WhatsApp Video *
+/1.jpg
+/egypt-animation-gif-download-*.mp4
+/sarcophagus-animation-gif-download-*.mp4
+
+# ---- Agent scratch ------------------------------------------------------
+.agent/
