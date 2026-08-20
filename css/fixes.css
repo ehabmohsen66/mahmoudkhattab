@@ -688,40 +688,42 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 }
 
-/* ---------- 21. Hero Image Gallery: Refined Spacing & Alignment ---------- */
+/* ---------- 21. Hero Image Gallery: Perfectly Centered & Balanced ---------- */
 .hero-guide-card,
 .hero-guide-card:hover,
 .hero-guide-frame,
 .hero-guide-frame:hover {
+  transform: none !important;
   transition: none !important;
 }
 
 @media (min-width: 992px) {
   .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: clamp(20px, 2.5vw, 36px);
+    gap: 40px;
+  }
+  .hero-content {
+    max-width: 100%;
   }
   .hero-guide-card {
     width: 100%;
-    max-width: 580px;
-    margin-left: 0;
-    margin-right: auto;
-    transform: translateX(-16px) !important;
+    max-width: 560px;
+    margin: 0 auto;
+    justify-self: center;
+    transform: none !important;
   }
-  .hero-guide-card:hover {
-    transform: translateX(-16px) !important;
+  .hero-guide-frame {
+    margin: 0 auto;
   }
 }
 
 @media (min-width: 1200px) {
   .hero-grid {
-    gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
   }
   .hero-guide-card {
-    transform: translateX(-24px) !important;
-  }
-  .hero-guide-card:hover {
-    transform: translateX(-24px) !important;
+    max-width: 600px;
   }
 }
