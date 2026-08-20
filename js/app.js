@@ -268,6 +268,23 @@ function initHeroGallery() {
     if (event.key === 'ArrowRight') showSlide(heroGalleryIndex + 1);
   });
 
+  let touchStartX = 0;
+  gallery.addEventListener('touchstart', (e) => {
+    if (e.touches && e.touches[0]) touchStartX = e.touches[0].clientX;
+    stopRotation();
+  }, { passive: true });
+
+  gallery.addEventListener('touchend', (e) => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      const diff = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) showSlide(heroGalleryIndex - 1);
+        else showSlide(heroGalleryIndex + 1);
+      }
+    }
+    startRotation();
+  }, { passive: true });
+
   gallery.addEventListener('mouseenter', stopRotation);
   gallery.addEventListener('mouseleave', startRotation);
   gallery.addEventListener('focusin', stopRotation);
@@ -1337,7 +1354,8 @@ function initMobileNav() {
   const links = document.getElementById('nav-links');
 
   if (toggle && links) {
-    toggle.onclick = () => {
+    toggle.onclick = (e) => {
+      e.stopPropagation();
       links.classList.toggle('active');
     };
 
@@ -1345,6 +1363,20 @@ function initMobileNav() {
       l.onclick = () => {
         links.classList.remove('active');
       };
+    });
+
+    // Close when tapping outside the menu on mobile
+    document.addEventListener('click', (e) => {
+      if (links.classList.contains('active') && !links.contains(e.target) && !toggle.contains(e.target)) {
+        links.classList.remove('active');
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && links.classList.contains('active')) {
+        links.classList.remove('active');
+      }
     });
   }
 }
