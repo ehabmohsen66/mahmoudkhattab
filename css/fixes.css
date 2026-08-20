@@ -442,7 +442,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     align-items: center !important;
     gap: 10px !important;
   }
-  .drawer-weather-wrap {
+  .drawer-weather-wrap,
+  .drawer-lang-wrap {
     display: none !important;
   }
 }
@@ -487,4 +488,68 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     font-size: 0.88rem !important;
   }
 }
+
+/* ---------- 19. Back to Top Button ---------- */
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid var(--line, #d7e7eb);
+  box-shadow: 0 6px 22px rgba(7, 91, 120, 0.16);
+  color: var(--nile, #087ea4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 840;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px) scale(0.9);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s, background .2s, border-color .2s, box-shadow .2s;
+  pointer-events: none;
+}
+
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--nile, #087ea4);
+  stroke-width: 2.2;
+  transition: transform .2s ease;
+}
+
+.back-to-top:hover {
+  background: var(--sky, #f0f9fc);
+  border-color: var(--nile, #087ea4);
+  box-shadow: 0 10px 28px rgba(7, 91, 120, 0.24);
+  transform: translateY(-3px) scale(1.06);
+}
+
+.back-to-top:hover svg {
+  transform: translateY(-2px);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .back-to-top {
+    bottom: 76px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+  }
+  .back-to-top svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
 

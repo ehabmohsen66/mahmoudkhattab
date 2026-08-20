@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollEffects();
   initContactChooser();
   initHeroGallery();
+  initBackToTop();
 });
 
 /* ==========================================================================
@@ -1314,3 +1315,30 @@ function handleContactForm(e) {
     alertBox.innerHTML = `✓ ${TRANSLATIONS[currentLang].formSuccess || 'Спасибо! Запрос отправлен. Махмуд свяжется с вами в течение 10 минут.'}`;
   }
 }
+
+/* ==========================================================================
+   10. Back to Top Button Engine
+   ========================================================================== */
+function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 300) {
+      btn.classList.add('is-visible');
+    } else {
+      btn.classList.remove('is-visible');
+    }
+  };
+
+  window.addEventListener('scroll', toggleVisibility, { passive: true });
+  toggleVisibility();
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
