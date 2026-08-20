@@ -15,12 +15,15 @@ const MIME_TYPES = {
   '.svg': 'image/svg+xml',
   '.mp4': 'video/mp4',
   '.webm': 'video/webm',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.webmanifest': 'application/manifest+json; charset=utf-8'
 };
 
 const server = http.createServer((req, res) => {
   let reqUrl = decodeURI(req.url.split('?')[0]);
-  if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
+  if (reqUrl === '/' || reqUrl === '' || reqUrl === '/en' || reqUrl === '/zh' || reqUrl === '/en/' || reqUrl === '/zh/') {
+    reqUrl = '/index.html';
+  }
 
   const filePath = path.join(__dirname, reqUrl);
 
@@ -76,15 +79,20 @@ function startServer(portIndex = 0) {
     return;
   }
   const port = portsToTry[portIndex];
-  server.listen(port, () => {
-    console.log(`Mahmoud Khattab Tour Website running at http://localhost:${port}`);
-  });
-  server.on('error', (err) => {
+  
+  const onError = (err) => {
+    server.removeListener('error', onError);
     if (err.code === 'EADDRINUSE') {
       startServer(portIndex + 1);
     } else {
       console.error(err);
     }
+  };
+
+  server.once('error', onError);
+  server.listen(port, () => {
+    server.removeListener('error', onError);
+    console.log(`Mahmoud Khattab Tour Website running at http://localhost:${port}`);
   });
 }
 
