@@ -690,14 +690,23 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 
 /* ---------- 21. Hero Image Gallery Desktop Positioning ---------- */
 @media (min-width: 992px) {
+  .hero-grid {
+    gap: clamp(36px, 5vw, 70px);
+  }
   .hero-guide-card {
-    transform: translateX(28px);
+    transform: translateX(54px);
     transition: transform 0.3s ease;
   }
 }
 
 @media (min-width: 1200px) {
   .hero-guide-card {
-    transform: translateX(36px);
+    transform: translateX(76px);
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero-guide-card {
+    transform: translateX(96px);
   }
 }
