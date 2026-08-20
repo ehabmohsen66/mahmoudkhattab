@@ -119,39 +119,20 @@ html, body { overflow-x: hidden; max-width: 100%; }
   }
 }
 
-/* ---------- 2. BLOCKER: persistent contact affordance ---------- */
-/* human-redesign.css kills .floating-contact-bar in a display:none block. */
-.floating-contact-bar {
-  display: flex !important;
-  position: fixed;
-  z-index: 850;
-  gap: 10px;
-}
-
-/* desktop: vertical rail, out of the reading column */
+/* ---------- 2. Floating Contact Bar ---------- */
+/* Desktop: floating contact icons on the right removed per user request */
 @media (min-width: 901px) {
   .floating-contact-bar {
-    right: 20px;
-    bottom: 24px;
-    flex-direction: column;
-    align-items: flex-end;
+    display: none !important;
   }
-  .floating-contact-bar .floating-btn {
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    display: inline-flex; align-items: center; justify-content: center;
-    box-shadow: 0 8px 22px rgba(7, 91, 120, 0.22);
-    transition: transform .2s ease, box-shadow .2s ease;
-  }
-  .floating-contact-bar .floating-btn:hover { transform: translateY(-2px) scale(1.04); }
-  /* WhatsApp is the primary channel — make it read that way */
-  .floating-contact-bar .fl-whatsapp { order: -1; width: 62px; height: 62px; }
-  .floating-contact-bar .fl-whatsapp svg { width: 30px; height: 30px; }
 }
 
 /* mobile: one wide labelled primary action + compact secondaries */
 @media (max-width: 900px) {
   .floating-contact-bar {
+    display: flex !important;
+    position: fixed;
+    z-index: 850;
     left: 0; right: 0; bottom: 0;
     flex-direction: row;
     align-items: center;
