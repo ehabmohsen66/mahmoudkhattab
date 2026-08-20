@@ -553,28 +553,19 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 /* ---------- 20. Minimalist Editorial Stats Strip ---------- */
+/* Global / Reviews strip (Spacious layout) */
 .stats-strip {
   width: 100%;
   max-width: 960px;
-  margin: 48px auto 0;
+  margin: 0 auto 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 16px;
+  padding: 30px 16px;
   border-top: 1px solid var(--line, #E4E2DA);
   border-bottom: 1px solid var(--line, #E4E2DA);
   background: transparent;
   box-sizing: border-box;
-}
-
-.stats-strip--hero {
-  margin: 52px auto 0;
-  width: 100%;
-  max-width: 960px;
-}
-
-.reviews-section .stats-strip {
-  margin: 0 auto 44px;
 }
 
 .stat {
@@ -583,19 +574,19 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .stat .value {
   font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 1.15;
   color: var(--ink, #1F1E1B);
 }
 
 .stat .label {
-  font-size: 12px;
+  font-size: 11.5px;
   color: var(--muted, #6B6A63);
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -603,12 +594,12 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 .stat .spacer {
-  padding-top: 22px;
+  padding-top: 18px;
 }
 
 .divider {
   width: 1px;
-  height: 56px;
+  height: 48px;
   background: var(--line, #E4E2DA);
   flex-shrink: 0;
 }
@@ -616,14 +607,60 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 .stars {
   display: flex;
   gap: 3px;
-  height: 14px;
+  height: 13px;
   align-items: center;
 }
 
 .stars svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
   fill: #C98A2E;
+}
+
+/* Hero Compact Variant: scaled down to fit inside the hero column smoothly */
+.stats-strip--hero {
+  max-width: 100%;
+  margin: 18px 0 22px;
+  padding: 12px 2px;
+  gap: 2px;
+  border-top: 1px solid var(--line, #E4E2DA);
+  border-bottom: 1px solid var(--line, #E4E2DA);
+}
+
+.stats-strip--hero .stat {
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 2px;
+  padding: 0 2px;
+}
+
+.stats-strip--hero .stat .value {
+  font-size: 1.18rem;       /* ~19px */
+  line-height: 1.1;
+}
+
+.stats-strip--hero .stat .label {
+  font-size: 0.60rem;       /* ~9.6px */
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.stats-strip--hero .stat .spacer {
+  padding-top: 11px;
+}
+
+.stats-strip--hero .divider {
+  height: 26px;
+}
+
+.stats-strip--hero .stars {
+  gap: 1.5px;
+  height: 9px;
+}
+
+.stats-strip--hero .stars svg {
+  width: 9px;
+  height: 9px;
 }
 
 /* Reviews Heading layout cleanup */
@@ -646,15 +683,15 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   .stats-strip {
     display: flex !important;
     flex-wrap: wrap !important;
-    row-gap: 28px !important;
-    padding: 24px 8px !important;
+    row-gap: 20px !important;
+    padding: 18px 6px !important;
     border-bottom: 1px solid var(--line, #E4E2DA) !important;
   }
   .stat {
     flex: 0 0 50% !important;
   }
   .stat .value {
-    font-size: 26px !important;
+    font-size: 22px !important;
   }
   .divider {
     display: none !important;
