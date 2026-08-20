@@ -363,8 +363,9 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     min-width: 0;
   }
 }
-@media (max-width: 380px) {
-  /* very small phones: drop the two least-used channels rather than squeeze */
+@media (max-width: 440px) {
+  /* the primary label was clipping to "Написать в Wh…" — drop the two
+     least-used channels rather than squeeze the call to action */
   .floating-contact-bar .fl-line,
   .floating-contact-bar .fl-viber { display: none; }
 }
@@ -552,115 +553,117 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 }
 
-/* ---------- 20. Minimalist Editorial Stats Strip ---------- */
-/* Global / Reviews strip (Spacious layout) */
+/* ---------- 20. Stats strip — grid-aligned ---------- */
+/*
+ * Was: a flex row with `align-items:center` and a `.spacer{padding-top}` hack
+ * faking the height of the star row. Two consequences, both visible:
+ *   1. "Experience since 2007" wraps to two lines, so centring made that cell
+ *      taller and floated its number ABOVE the other three.
+ *   2. The dividers were flex items competing with `flex:1` stats, so the four
+ *      columns were never actually equal width.
+ *
+ * Now: an explicit grid. Columns are exactly 1fr with 1px rules between them,
+ * and every cell shares the same three-row rhythm — stars / value / label —
+ * with rows 1 and 2 at fixed heights. Numbers therefore sit on one baseline
+ * no matter how many lines a label takes.
+ */
 .stats-strip {
   width: 100%;
   max-width: 960px;
   margin: 0 auto 44px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 30px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr 1px 1fr 1px 1fr;
+  align-items: stretch;
+  padding: 28px 8px;
   border-top: 1px solid var(--line, #E4E2DA);
   border-bottom: 1px solid var(--line, #E4E2DA);
   background: transparent;
   box-sizing: border-box;
 }
 
-.stat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.stats-strip .stat {
+  display: grid;
+  grid-template-rows: 16px auto auto;   /* stars | value | label */
+  justify-items: center;
+  align-content: start;
   text-align: center;
-  gap: 5px;
+  gap: 6px;
+  padding: 0 10px;
+  min-width: 0;
 }
 
-.stat .value {
+/* row 1 — reserved in every cell, occupied only by the rating */
+.stats-strip .stars {
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+.stats-strip .stars svg { width: 13px; height: 13px; fill: #C98A2E; }
+
+/* row 2 — the number. Fixed row height = shared baseline. */
+.stats-strip .value {
+  grid-row: 2;
+  align-self: end;
   font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
   font-weight: 500;
   font-size: 28px;
   line-height: 1.15;
   color: var(--ink, #1F1E1B);
+  white-space: nowrap;
 }
+/* the old hack is no longer needed — the grid row reserves the space */
+.stats-strip .value.spacer { padding-top: 0; }
 
-.stat .label {
+/* row 3 — label. Wrapping here pushes down, never sideways or up. */
+.stats-strip .label {
+  grid-row: 3;
+  align-self: start;
   font-size: 11.5px;
+  line-height: 1.35;
   color: var(--muted, #6B6A63);
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-weight: 500;
+  text-wrap: balance;
+  max-width: 17ch;
 }
 
-.stat .spacer {
-  padding-top: 18px;
-}
-
-.divider {
+.stats-strip .divider {
   width: 1px;
-  height: 48px;
+  justify-self: center;
+  align-self: center;
+  height: 52px;
   background: var(--line, #E4E2DA);
-  flex-shrink: 0;
 }
 
-.stars {
-  display: flex;
-  gap: 3px;
-  height: 13px;
-  align-items: center;
-}
-
-.stars svg {
-  width: 13px;
-  height: 13px;
-  fill: #C98A2E;
-}
-
-/* Hero Compact Variant: scaled down to fit inside the hero column smoothly */
+/* Hero variant — same grid, smaller type */
 .stats-strip--hero {
   max-width: 100%;
   margin: 18px 0 22px;
-  padding: 12px 2px;
-  gap: 2px;
-  border-top: 1px solid var(--line, #E4E2DA);
-  border-bottom: 1px solid var(--line, #E4E2DA);
+  padding: 14px 2px;
 }
+.stats-strip--hero .stat            { grid-template-rows: 13px auto auto; gap: 4px; padding: 0 6px; }
+.stats-strip--hero .stars           { height: 13px; gap: 2px; }
+.stats-strip--hero .stars svg       { width: 10px; height: 10px; }
+.stats-strip--hero .value           { font-size: 1.32rem; }
+.stats-strip--hero .label           { font-size: 0.68rem; letter-spacing: 0.02em; max-width: 15ch; }
+.stats-strip--hero .divider         { height: 36px; }
 
-.stats-strip--hero .stat {
-  flex: 1 1 0;
-  min-width: 0;
-  gap: 2px;
-  padding: 0 2px;
-}
-
-.stats-strip--hero .stat .value {
-  font-size: 1.18rem;       /* ~19px */
-  line-height: 1.1;
-}
-
-.stats-strip--hero .stat .label {
-  font-size: 0.60rem;       /* ~9.6px */
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-}
-
-.stats-strip--hero .stat .spacer {
-  padding-top: 11px;
-}
-
-.stats-strip--hero .divider {
-  height: 26px;
-}
-
-.stats-strip--hero .stars {
-  gap: 1.5px;
-  height: 9px;
-}
-
-.stats-strip--hero .stars svg {
-  width: 9px;
-  height: 9px;
+/* Narrow screens: 4 across is too tight — go 2x2 and drop the rules */
+@media (max-width: 620px) {
+  .stats-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 0;
+    padding: 22px 8px;
+  }
+  .stats-strip .divider { display: none; }
+  .stats-strip .stat    { padding: 0 6px; }
+  .stats-strip .value   { font-size: 24px; }
+  .stats-strip--hero .value { font-size: 1.24rem; }
+  .stats-strip .label,
+  .stats-strip--hero .label { font-size: 0.68rem; max-width: 16ch; }
 }
 
 /* Reviews Heading layout cleanup */
@@ -678,32 +681,23 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   justify-content: center;
 }
 
-/* Stack on narrow screens */
-@media (max-width: 640px) {
-  .stats-strip {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    row-gap: 20px !important;
-    padding: 18px 6px !important;
-    border-bottom: 1px solid var(--line, #E4E2DA) !important;
-  }
-  .stat {
-    flex: 0 0 50% !important;
-  }
-  .stat .value {
-    font-size: 22px !important;
-  }
-  .divider {
-    display: none !important;
-  }
-}
-
+/* Hide floating badge on smaller tablets/mobile */
 @media (max-width: 900px) {
   .hero-guide-badge-floating {
     display: none !important;
   }
 }
 
+/* ---------- 21. Hero Image Gallery Desktop Positioning ---------- */
+@media (min-width: 992px) {
+  .hero-guide-card {
+    transform: translateX(28px);
+    transition: transform 0.3s ease;
+  }
+}
 
-
-
+@media (min-width: 1200px) {
+  .hero-guide-card {
+    transform: translateX(36px);
+  }
+}

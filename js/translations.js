@@ -173,7 +173,7 @@ const TRANSLATIONS = {
     metricRatingLabel: 'Рейтинг гида',
     metricPositiveLabel: 'Положительных отзывов',
     metricExperienceVal: '20 Лет',
-    metricExperienceLabel: 'Опыта (с 2007 г.)',
+    metricExperienceLabel: 'Гидом с 2007 года',
     metricToursLabel: 'Проведено экскурсий',
     
     // Gallery & Videos Section
@@ -395,7 +395,7 @@ const TRANSLATIONS = {
     metricRatingLabel: 'Guide Rating',
     metricPositiveLabel: 'Positive Reviews',
     metricExperienceVal: '20 Years',
-    metricExperienceLabel: 'Years of Experience (Since 2007)',
+    metricExperienceLabel: 'Guiding Since 2007',
     metricToursLabel: 'Tours Delivered',
     
     // Gallery & Videos Section
@@ -620,7 +620,7 @@ const TRANSLATIONS = {
     metricRatingLabel: '导游评分',
     metricPositiveLabel: '好评率',
     metricExperienceVal: '20 年',
-    metricExperienceLabel: '从业经验（始于2007年）',
+    metricExperienceLabel: '自2007年执业',
     metricToursLabel: '完成行程数',
     
     // Gallery & Videos Section
