@@ -1133,6 +1133,8 @@ function renderGallery(category = 'all') {
         direction: row.direction,
         baseSpeed: row.baseSpeed,
         repeat: row.repeat,
+        itemCount: row.items.length,
+        singleSetWidth: 0,
         x: row.direction === 1 ? -100 : 0,
         isDragging: false
       };
@@ -1152,6 +1154,37 @@ function renderGallery(category = 'all') {
       renderGallery(e.currentTarget.dataset.tab);
     };
   });
+}
+
+function getTrackWrapWidth(track) {
+  if (track.singleSetWidth && track.singleSetWidth > 200) {
+    return track.singleSetWidth;
+  }
+  if (track.innerElement) {
+    const cards = track.innerElement.querySelectorAll('.velocity-card');
+    if (cards.length > 0 && track.itemCount && cards.length >= track.itemCount * 2) {
+      const firstCard = cards[0];
+      const nextSetFirstCard = cards[track.itemCount];
+      if (firstCard && nextSetFirstCard) {
+        const offsetDist = nextSetFirstCard.offsetLeft - firstCard.offsetLeft;
+        if (offsetDist > 200) {
+          track.singleSetWidth = offsetDist;
+          return offsetDist;
+        }
+      }
+    }
+    const scrollW = track.innerElement.scrollWidth;
+    if (scrollW > 500 && track.repeat) {
+      const calculated = scrollW / track.repeat;
+      if (calculated > 200) {
+        track.singleSetWidth = calculated;
+        return calculated;
+      }
+    }
+  }
+  const isMobile = window.innerWidth <= 768;
+  const cardW = isMobile ? (275 + 12) : (350 + 18);
+  return (track.itemCount || 30) * cardW;
 }
 
 function initTrackPointerEvents(rowElement, trackObj) {
@@ -1174,10 +1207,10 @@ function initTrackPointerEvents(rowElement, trackObj) {
     if (Math.abs(diff) > 6) hasMoved = true;
     trackObj.x = dragStartX + diff;
 
-    const wrapWidth = trackObj.innerElement.scrollWidth / (trackObj.repeat || 2);
-    if (wrapWidth > 50) {
-      while (trackObj.x <= -wrapWidth) trackObj.x += wrapWidth;
-      while (trackObj.x >= 0) trackObj.x -= wrapWidth;
+    const wrapWidth = getTrackWrapWidth(trackObj);
+    if (wrapWidth > 100) {
+      if (trackObj.x <= -wrapWidth) trackObj.x += wrapWidth;
+      else if (trackObj.x >= 0) trackObj.x -= wrapWidth;
     }
     trackObj.innerElement.style.transform = `translate3d(${trackObj.x}px, 0, 0)`;
   });
@@ -1240,13 +1273,12 @@ function runScrollVelocityLoop(timestamp) {
     moveBy *= hoverFactor;
     track.x += moveBy;
 
-    // Precision wrap
-    const wrapWidth = track.innerElement.scrollWidth / (track.repeat || 2);
-    if (wrapWidth > 50) {
-      while (track.x <= -wrapWidth) {
+    // Stable, jitter-free boundary wrap
+    const wrapWidth = getTrackWrapWidth(track);
+    if (wrapWidth > 100) {
+      if (track.x <= -wrapWidth) {
         track.x += wrapWidth;
-      }
-      while (track.x >= 0) {
+      } else if (track.x >= 0) {
         track.x -= wrapWidth;
       }
     }
