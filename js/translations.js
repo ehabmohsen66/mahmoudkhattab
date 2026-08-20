@@ -21,7 +21,7 @@ const TRANSLATIONS = {
     // Top Bar & Badges
     topExperience: '20 лет опыта в туризме (с 2007 г.)',
     topLanguages: 'Языки: Русский • English • 中文 • العربية',
-    topWeather: 'Каир: 34°C, hazy sunshine',
+    topWeather: 'Каир: 34°C, солнечно',
     topContactQuick: 'Связаться с гидом: WhatsApp / Telegram / Viber / Line',
     phoneDisplay: '+20 100 968 6874',
     
@@ -243,7 +243,7 @@ const TRANSLATIONS = {
     // Top Bar & Badges
     topExperience: '20 Years of Tourism Experience (Since 2007)',
     topLanguages: 'Languages: Russian • English • Chinese (中文) • Arabic',
-    topWeather: 'Cairo: 34°C, hazy sunshine',
+    topWeather: 'Cairo: 34°C, sunny',
     topContactQuick: 'Direct Connect: WhatsApp / Telegram / Viber / Line',
     phoneDisplay: '+20 100 968 6874',
     
@@ -468,7 +468,7 @@ const TRANSLATIONS = {
     // Top Bar & Badges
     topExperience: '20年埃及旅游专业经验（始于2007年）',
     topLanguages: '精通语言：俄语 • 英语 • 中文 (普通话) • 阿拉伯语',
-    topWeather: '开罗：34°C，薄雾晴天',
+    topWeather: '开罗：34°C 晴',
     topContactQuick: '直接联系向导：WhatsApp / Telegram / Viber / Line',
     phoneDisplay: '+20 100 968 6874',
     

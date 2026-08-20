@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="css/responsive.css?v=11.1">
   <link rel="stylesheet" href="css/redesign.css?v=11.1">
   <link rel="stylesheet" href="css/human-redesign.css?v=11.1">
-  <link rel="stylesheet" href="css/fixes.css?v=3">
+  <link rel="stylesheet" href="css/fixes.css?v=4">
   <script src="https://cdn.jsdelivr.net/npm/@dotlottie/player-component@v1.3.0/dist/dotlottie-player.js" defer></script>
 
   <!-- Schema.org JSON-LD -->
@@ -158,6 +158,12 @@
           <li><a href="#reviews" class="nav-link" data-i18n="navReviews">Отзывы</a></li>
           <li><a href="#gallery" class="nav-link" data-i18n="navGallery">Галерея</a></li>
           <li><a href="#contact" class="nav-link" data-i18n="navContact">Контакты</a></li>
+          <li class="drawer-weather-wrap">
+            <div class="nav-weather-badge nav-weather-badge--drawer" aria-label="Current weather in Cairo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <span data-i18n="topWeather">Каир: 34°C, солнечно</span>
+            </div>
+          </li>
           <li class="drawer-lang-wrap"><div class="drawer-lang">
             <button type="button" class="lang-btn active" data-lang="ru" aria-label="Русский">RU</button>
             <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
@@ -166,6 +172,10 @@
         </ul>
 
         <div class="nav-actions">
+          <div class="nav-weather-badge" aria-label="Current weather in Cairo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            <span data-i18n="topWeather">Каир: 34°C, солнечно</span>
+          </div>
           <div class="language-picker" aria-label="Language selection">
             <button type="button" class="lang-btn active" data-lang="ru" aria-label="Русский">RU</button>
             <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
