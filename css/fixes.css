@@ -22,10 +22,10 @@ html, body { overflow-x: hidden; max-width: 100%; }
   flex-wrap: nowrap;
   width: 100%;
 }
-.brand-logo { min-width: 0; flex: 0 1 auto; overflow: hidden; }
+.brand-logo { min-width: 0; flex: 0 1 auto; }
 .brand-text { min-width: 0; }
-.brand-text h1,
-.brand-text > span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.brand-text .brand-name { font-size: 1.15rem; font-weight: 750; white-space: nowrap; }
+.brand-text > span { font-size: 0.75rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
 .nav-actions { flex: 0 0 auto; margin-left: auto; display: flex; align-items: center; gap: 8px; }
 
 .menu-toggle {
@@ -50,17 +50,54 @@ html, body { overflow-x: hidden; max-width: 100%; }
   padding: 0 10px;
 }
 
-@media (max-width: 1100px) {
-  /* brand shrinks first so the toggle always has its 44px */
-  .brand-logo-image { width: 40px; height: 40px; }
-  .brand-text h1 { font-size: 1rem; }
-}
-
 @media (max-width: 900px) {
   .menu-toggle { display: inline-flex; }
-  .brand-text > span { display: none; }          /* tagline off on phones */
-  .brand-text h1 { font-size: 0.98rem; }
-  .brand-logo { max-width: 46vw; }
+  .brand-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    max-width: calc(100vw - 72px) !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  .brand-emblem-wrap {
+    width: 48px !important;
+    height: 48px !important;
+    flex: 0 0 48px !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .brand-logo-image {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 110px !important;
+    height: 110px !important;
+    max-width: none !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .brand-text {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    min-width: 0 !important;
+  }
+  .brand-text .brand-name {
+    font-size: 1.10rem !important;
+    font-weight: 750 !important;
+    line-height: 1.15 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+  .brand-text > span {
+    font-size: 0.68rem !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+  }
 
   /* language switcher moves into the drawer, out of the cramped bar */
   .nav-container > .nav-actions > .language-picker { display: none; }
@@ -381,11 +418,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     justify-content: center;
   }
 }
-/* brand had room to spare once the drawer took the nav links */
-@media (max-width: 900px) {
-  .brand-logo { max-width: 62vw; }
-  .brand-text .brand-name { font-size: 0.95rem; }
-}
+
 
 /* ---------- 17. Review cards: uniform height, graceful overflow ---------- */
 /* Two bad options were on the table: hard-clamp every quote mid-word (the
