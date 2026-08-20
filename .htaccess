@@ -27,6 +27,22 @@ Options +FollowSymLinks
   # Strip index.html from the URL (nicer canonical)
   RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
   RewriteRule ^ / [R=301,L]
+
+  # ---------- Multi-language URLs (/ for RU, /en for EN, /zh for ZH) ----------
+  # Redirect /ru to canonical root /
+  RewriteRule ^ru/?$ / [R=301,L]
+
+  # Chinese aliases: /cn -> /zh
+  RewriteRule ^cn/?$ /zh [R=301,L]
+
+  # Strip trailing slash from /en/ and /zh/ for clean URLs
+  RewriteRule ^(en|zh)/$ /$1 [R=301,L]
+
+  # Prevent sub-path asset 404s if accessed under /en/ or /zh/
+  RewriteRule ^(en|zh)/(css|js|assets|components)/(.+)$ $2/$3 [L]
+
+  # Serve index.html for /en and /zh
+  RewriteRule ^(en|zh)$ index.html [L,QSA]
 </IfModule>
 
 # ---------- Custom error page ----------

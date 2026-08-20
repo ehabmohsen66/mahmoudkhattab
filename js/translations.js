@@ -3,6 +3,9 @@
 
 const TRANSLATIONS = {
   ru: {
+    pageTitle: 'Махмуд Хаттаб — Частный Русский Гид в Египте | VIP Экскурсии в Каире, Луксоре, Гизе',
+    metaDescription: 'Махмуд Хаттаб — лицензированный русскоговорящий частный гид в Египте с 20-летним опытом. Индивидуальные VIP туры по Каиру, Пирамидам Гизы, Луксору, Асуану, Александрии и Белой пустыне.',
+
     // Navigation
     navHome: 'Главная',
     navAbout: 'О гиде',
@@ -222,6 +225,9 @@ const TRANSLATIONS = {
   },
 
   en: {
+    pageTitle: 'Mahmoud Khattab — Private Tour Guide in Egypt | VIP Cairo, Luxor & Giza Tours',
+    metaDescription: 'Mahmoud Khattab — Licensed private Egyptian tour guide with 20+ years experience. Tailored VIP tours across Cairo, Giza Pyramids, Luxor, Aswan, Alexandria, and White Desert.',
+
     // Navigation
     navHome: 'Home',
     navAbout: 'About Me',
@@ -444,6 +450,9 @@ const TRANSLATIONS = {
   },
 
   zh: {
+    pageTitle: '马哈茂德·哈塔卜 — 埃及官方认证中文私人导游 | 开罗、卢克索、吉萨金字塔定制游',
+    metaDescription: '马哈茂德·哈塔卜（Mahmoud Khattab）—— 埃及国家旅游局认证资深私人导游，20年丰富带团经验。提供开罗、吉萨金字塔、卢克索、阿斯旺、亚历山大及黑白沙漠专属VIP定制游。',
+
     // Navigation
     navHome: '首页',
     navAbout: '关于向导',

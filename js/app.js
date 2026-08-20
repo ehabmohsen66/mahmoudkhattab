@@ -81,22 +81,54 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ==========================================================================
    1. Multilingual Localization Engine
    ========================================================================== */
-function initLanguage() {
-  const savedLang = localStorage.getItem('mahmoud_tour_lang');
-  if (savedLang && (savedLang === 'ru' || savedLang === 'en' || savedLang === 'zh')) {
-    currentLang = savedLang;
+function getLanguageFromUrl() {
+  const path = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '');
+  const segments = path.split('/');
+  const first = segments[0] || '';
+  if (first === 'en') return 'en';
+  if (first === 'zh' || first === 'cn') return 'zh';
+  if (first === 'ru') return 'ru';
+
+  const params = new URLSearchParams(window.location.search);
+  const langParam = params.get('lang');
+  if (langParam && (langParam === 'en' || langParam === 'zh' || langParam === 'ru')) {
+    return langParam;
   }
+  return null;
+}
+
+function initLanguage() {
+  const urlLang = getLanguageFromUrl();
+  const savedLang = localStorage.getItem('mahmoud_tour_lang');
+
+  if (urlLang) {
+    currentLang = urlLang;
+  } else if (savedLang && (savedLang === 'ru' || savedLang === 'en' || savedLang === 'zh')) {
+    currentLang = 'ru';
+  } else {
+    currentLang = 'ru';
+  }
+  localStorage.setItem('mahmoud_tour_lang', currentLang);
   
   // Set language buttons active state
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
     btn.addEventListener('click', (e) => {
       const targetLang = e.currentTarget.dataset.lang;
-      setLanguage(targetLang);
+      setLanguage(targetLang, true);
     });
   });
 
+  // Handle browser Back / Forward buttons
+  window.addEventListener('popstate', () => {
+    const lang = getLanguageFromUrl() || 'ru';
+    if (lang !== currentLang) {
+      setLanguage(lang, false);
+    }
+  });
+
   applyTranslations(currentLang);
+  document.body.classList.toggle('lang-zh', currentLang === 'zh');
 }
 
 function initContactChooser() {
@@ -127,8 +159,8 @@ function initContactChooser() {
   });
 }
 
-function setLanguage(lang) {
-  if (currentLang === lang) return;
+function setLanguage(lang, updateUrl = true) {
+  if (currentLang === lang && !updateUrl) return;
   currentLang = lang;
   localStorage.setItem('mahmoud_tour_lang', lang);
   
@@ -137,6 +169,18 @@ function setLanguage(lang) {
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
   });
+
+  if (updateUrl) {
+    const hash = window.location.hash || '';
+    let targetPath = '/';
+    if (lang === 'en') targetPath = '/en';
+    else if (lang === 'zh') targetPath = '/zh';
+
+    const currentPath = window.location.pathname.replace(/\/+$/, '') || '/';
+    if (currentPath !== targetPath) {
+      history.pushState({ lang }, '', targetPath + hash);
+    }
+  }
 
   applyTranslations(lang);
   
@@ -248,6 +292,15 @@ function applyTranslations(lang) {
 
   // Update HTML lang attribute
   document.documentElement.lang = lang;
+
+  // Update page title & meta description if defined
+  if (dict.pageTitle) {
+    document.title = dict.pageTitle;
+  }
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc && dict.metaDescription) {
+    metaDesc.setAttribute('content', dict.metaDescription);
+  }
 }
 
 /* ==========================================================================
