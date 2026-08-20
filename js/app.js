@@ -627,9 +627,21 @@ function sendTripToLine() {
 /* ==========================================================================
    4. Verified Reviews Engine
    ========================================================================== */
+let reviewsAutoplayTimer = null;
+let reviewsObserver = null;
+
 function renderReviews() {
   const container = document.getElementById('reviews-container');
   if (!container) return;
+
+  if (reviewsAutoplayTimer) {
+    clearInterval(reviewsAutoplayTimer);
+    reviewsAutoplayTimer = null;
+  }
+  if (reviewsObserver) {
+    reviewsObserver.disconnect();
+    reviewsObserver = null;
+  }
 
   const verifiedTag = TRANSLATIONS[currentLang]?.reviewVerifiedTag || (currentLang === 'zh' ? '✓ 真实认证评价' : (currentLang === 'en' ? '✓ Verified Review' : '✓ Проверенный отзыв'));
   const prevLabel = TRANSLATIONS[currentLang]?.reviewsSliderPrev || (currentLang === 'zh' ? '上一条评价' : (currentLang === 'en' ? 'Previous review' : 'Предыдущий отзыв'));
@@ -733,16 +745,63 @@ function renderReviews() {
     });
   };
 
+  // Autoplay functionality (slow automatic sliding)
+  const AUTOPLAY_INTERVAL = 4600; // 4.6 seconds for a relaxed, slow slide
+  let isPaused = false;
+  let isIntersecting = false;
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const autoAdvance = () => {
+    if (isPaused || isDown || !isIntersecting || prefersReducedMotion || document.hidden) return;
+    const step = getStep();
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
+    if (slider.scrollLeft >= maxScroll - 16) {
+      slider.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      slider.scrollBy({ left: step, behavior: 'smooth' });
+    }
+  };
+
+  const startAutoplay = () => {
+    if (reviewsAutoplayTimer) clearInterval(reviewsAutoplayTimer);
+    if (!prefersReducedMotion) {
+      reviewsAutoplayTimer = setInterval(autoAdvance, AUTOPLAY_INTERVAL);
+    }
+  };
+
+  const stopAutoplay = () => {
+    if (reviewsAutoplayTimer) {
+      clearInterval(reviewsAutoplayTimer);
+      reviewsAutoplayTimer = null;
+    }
+  };
+
+  const pauseAutoplay = () => {
+    isPaused = true;
+    stopAutoplay();
+  };
+
+  const resumeAutoplay = () => {
+    isPaused = false;
+    startAutoplay();
+  };
+
+  const onManualAction = (direction) => {
+    scrollToStep(direction);
+    stopAutoplay();
+    setTimeout(startAutoplay, 2500);
+  };
+
   prev.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    scrollToStep(-1);
+    onManualAction(-1);
   });
 
   next.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
-    scrollToStep(1);
+    onManualAction(1);
   });
 
   // Desktop Mouse Drag Navigation
@@ -754,6 +813,7 @@ function renderReviews() {
   slider.addEventListener('mousedown', (e) => {
     isDown = true;
     hasDragged = false;
+    pauseAutoplay();
     slider.classList.add('is-dragging');
     startX = e.pageX - slider.offsetLeft;
     scrollStart = slider.scrollLeft;
@@ -763,17 +823,29 @@ function renderReviews() {
     if (isDown) {
       isDown = false;
       slider.classList.remove('is-dragging');
-      setTimeout(updateCounter, 100);
+      setTimeout(() => {
+        updateCounter();
+        resumeAutoplay();
+      }, 100);
     }
   });
 
+  slider.addEventListener('mouseenter', pauseAutoplay);
   slider.addEventListener('mouseleave', () => {
     if (isDown) {
       isDown = false;
       slider.classList.remove('is-dragging');
-      setTimeout(updateCounter, 100);
     }
+    resumeAutoplay();
   });
+
+  slider.addEventListener('touchstart', pauseAutoplay, { passive: true });
+  slider.addEventListener('touchend', () => {
+    setTimeout(resumeAutoplay, 1800);
+  }, { passive: true });
+
+  slider.addEventListener('focusin', pauseAutoplay);
+  slider.addEventListener('focusout', resumeAutoplay);
 
   slider.addEventListener('mousemove', (e) => {
     if (!isDown) return;
@@ -799,11 +871,38 @@ function renderReviews() {
 
   slider.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
-      scrollToStep(-1);
+      onManualAction(-1);
       e.preventDefault();
     } else if (e.key === 'ArrowRight') {
-      scrollToStep(1);
+      onManualAction(1);
       e.preventDefault();
+    }
+  });
+
+  // Observe visibility in viewport to run autoplay only when in view
+  if ('IntersectionObserver' in window) {
+    reviewsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting && !isPaused) {
+          startAutoplay();
+        } else {
+          stopAutoplay();
+        }
+      });
+    }, { threshold: 0.15 });
+    reviewsObserver.observe(container);
+  } else {
+    isIntersecting = true;
+    startAutoplay();
+  }
+
+  // Respect tab visibility
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoplay();
+    } else if (isIntersecting && !isPaused) {
+      startAutoplay();
     }
   });
 
