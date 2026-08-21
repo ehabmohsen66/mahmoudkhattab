@@ -208,8 +208,7 @@ function setLanguage(lang, updateUrl = true) {
 
     renderReviews();
 
-    const activeGalTab = document.querySelector('.gal-tab-btn.active')?.dataset.tab || 'all';
-    renderGallery(activeGalTab);
+    renderGallery();
     updateHeroGalleryCaption();
   };
 
@@ -948,17 +947,12 @@ function renderReviews() {
 }
 
 /* ==========================================================================
-   5. Media Gallery: ScrollVelocity Infinite Dynamic Showcase & Lightbox
+   5. Media Gallery: Infinite Showcase & Lightbox
    ========================================================================== */
 
 let velocityAnimFrame = null;
 let velocityTracksData = [];
-let lastScrollY = typeof window !== 'undefined' ? (window.scrollY || window.pageYOffset || 0) : 0;
-let rawScrollVelocity = 0;
-let smoothScrollVelocity = 0;
-let lastScrollTimestamp = performance.now();
 let lastAnimTimestamp = performance.now();
-let isScrollVelocityListenerBound = false;
 let galleryObserver = null;
 let isGalleryInView = true;
 
@@ -973,33 +967,7 @@ function getCategoryLabel(cat) {
   return labels[cat]?.[currentLang] || labels[cat]?.ru || cat;
 }
 
-function initScrollVelocityListener() {
-  if (isScrollVelocityListenerBound) return;
-  isScrollVelocityListenerBound = true;
-
-  window.addEventListener('scroll', () => {
-    if (!isGalleryInView) return;
-
-    const now = performance.now();
-    const currentY = window.scrollY || window.pageYOffset || 0;
-    const dt = Math.max((now - lastScrollTimestamp) / 1000, 0.016);
-    const dy = currentY - lastScrollY;
-
-    // Filter out micro-scrolls and layout shifts
-    if (Math.abs(dy) < 3) {
-      lastScrollY = currentY;
-      lastScrollTimestamp = now;
-      return;
-    }
-
-    const instantVelocity = dy / dt;
-    rawScrollVelocity = Math.min(Math.max(instantVelocity, -2500), 2500);
-    lastScrollY = currentY;
-    lastScrollTimestamp = now;
-  }, { passive: true });
-}
-
-function renderGallery(category = 'all') {
+function renderGallery() {
   const container = document.getElementById('gallery-container');
   if (!container) return;
 
@@ -1014,87 +982,45 @@ function renderGallery(category = 'all') {
   }
   velocityTracksData = [];
 
-  currentFilteredMedia = category === 'all' 
-    ? MEDIA_GALLERY 
-    : (category === 'videos' 
-        ? MEDIA_GALLERY.filter(m => m.type === 'video')
-        : MEDIA_GALLERY.filter(m => getMediaCategory(m) === category));
+  currentFilteredMedia = MEDIA_GALLERY;
 
-  // Determine row tracks configuration
-  let rowsData = [];
+  // 3 alternating tracks distributing all media items evenly
+  const targetPerRow = Math.ceil(MEDIA_GALLERY.length / 3);
+  const row1Items = [];
+  const row2Items = [];
+  const row3Items = [];
 
-  if (category === 'all') {
-    // 3 alternating tracks distributing all 91 media items evenly
-    // Row 1: Pyramids, Sphinx, Desert Sunrises, Abu Simbel, Giza Adventures
-    // Row 2: Luxor, Karnak, Hatshepsut, Kom Ombo, Philae, Sleeper Train, Nile Feluccas
-    // Row 3: Sahara Safari, Cairo, Alexandria, NMEC Museum, Khan el-Khalili, Tour Videos
-    const targetPerRow = Math.ceil(MEDIA_GALLERY.length / 3);
-    const row1Items = [];
-    const row2Items = [];
-    const row3Items = [];
+  MEDIA_GALLERY.forEach((item) => {
+    const cat = getMediaCategory(item);
+    if (cat === 'pyramids' || item.id === 'pic-15' || item.id === 'vid-1') {
+      if (row1Items.length < targetPerRow) row1Items.push(item);
+      else if (row2Items.length < targetPerRow) row2Items.push(item);
+      else row3Items.push(item);
+    } else if (cat === 'luxor-aswan' || item.id === 'vid-2' || item.id === 'vid-4') {
+      if (row2Items.length < targetPerRow) row2Items.push(item);
+      else if (row3Items.length < targetPerRow) row3Items.push(item);
+      else row1Items.push(item);
+    } else {
+      if (row3Items.length < targetPerRow) row3Items.push(item);
+      else if (row1Items.length < targetPerRow) row1Items.push(item);
+      else row2Items.push(item);
+    }
+  });
 
-    MEDIA_GALLERY.forEach((item) => {
-      const cat = getMediaCategory(item);
-      if (cat === 'pyramids' || item.id === 'pic-15' || item.id === 'vid-1') {
-        if (row1Items.length < targetPerRow) {
-          row1Items.push(item);
-        } else if (row2Items.length < targetPerRow) {
-          row2Items.push(item);
-        } else {
-          row3Items.push(item);
-        }
-      } else if (cat === 'luxor-aswan' || item.id === 'vid-2' || item.id === 'vid-4') {
-        if (row2Items.length < targetPerRow) {
-          row2Items.push(item);
-        } else if (row3Items.length < targetPerRow) {
-          row3Items.push(item);
-        } else {
-          row1Items.push(item);
-        }
-      } else {
-        if (row3Items.length < targetPerRow) {
-          row3Items.push(item);
-        } else if (row1Items.length < targetPerRow) {
-          row1Items.push(item);
-        } else {
-          row2Items.push(item);
-        }
-      }
-    });
+  // Distribute any leftover items
+  MEDIA_GALLERY.forEach(item => {
+    if (!row1Items.includes(item) && !row2Items.includes(item) && !row3Items.includes(item)) {
+      if (row1Items.length <= row2Items.length && row1Items.length <= row3Items.length) row1Items.push(item);
+      else if (row2Items.length <= row3Items.length) row2Items.push(item);
+      else row3Items.push(item);
+    }
+  });
 
-    // Distribute any leftover items
-    MEDIA_GALLERY.forEach(item => {
-      if (!row1Items.includes(item) && !row2Items.includes(item) && !row3Items.includes(item)) {
-        if (row1Items.length <= row2Items.length && row1Items.length <= row3Items.length) row1Items.push(item);
-        else if (row2Items.length <= row3Items.length) row2Items.push(item);
-        else row3Items.push(item);
-      }
-    });
-
-    rowsData = [
-      { direction: -1, baseSpeed: 50, items: row1Items, repeat: 2 },
-      { direction: 1, baseSpeed: 50, items: row2Items, repeat: 2 },
-      { direction: -1, baseSpeed: 46, items: row3Items, repeat: 2 }
-    ];
-  } else {
-    // 2 alternating tracks for selected category
-    const count = currentFilteredMedia.length;
-    const half = Math.ceil(count / 2);
-    const row1Items = currentFilteredMedia.slice(0, half);
-    const row2Items = currentFilteredMedia.slice(half);
-
-    // If one row is empty (e.g. single item), share items
-    const r1 = row1Items.length ? row1Items : currentFilteredMedia;
-    const r2 = row2Items.length ? row2Items : currentFilteredMedia;
-
-    const repeat1 = Math.max(3, Math.ceil(18 / r1.length));
-    const repeat2 = Math.max(3, Math.ceil(18 / r2.length));
-
-    rowsData = [
-      { direction: -1, baseSpeed: 52, items: r1, repeat: repeat1 },
-      { direction: 1, baseSpeed: 52, items: r2, repeat: repeat2 }
-    ];
-  }
+  const rowsData = [
+    { direction: -1, baseSpeed: 38, items: row1Items, repeat: 2 },
+    { direction: 1, baseSpeed: 38, items: row2Items, repeat: 2 },
+    { direction: -1, baseSpeed: 34, items: row3Items, repeat: 2 }
+  ];
 
   // Render HTML structure
   let html = '';
@@ -1143,9 +1069,9 @@ function renderGallery(category = 'all') {
 
   // Multilingual interactive hint
   const hints = {
-    ru: '✦ Прокручивайте страницу для ускорения • Наведите для паузы • Нажмите на фото для просмотра',
-    en: '✦ Scroll page to accelerate • Hover to pause • Click any photo to view in HD',
-    zh: '✦ 滚动页面可动态加速 • 悬停自动减速 • 点击图片查看高清大图与实拍视频'
+    ru: '✦ Проведите пальцем для прокрутки • Нажмите на любое фото или видео для просмотра в HD',
+    en: '✦ Drag to explore • Tap any photo or video to view in HD',
+    zh: '✦ 左右滑动浏览 • 点击任意照片或视频查看高清大图与实拍'
   };
   const hintText = hints[currentLang] || hints.ru;
 
@@ -1157,9 +1083,6 @@ function renderGallery(category = 'all') {
   `;
 
   container.innerHTML = html;
-
-  // Initialize velocity physics tracking for rows
-  initScrollVelocityListener();
 
   rowsData.forEach((row, rowIndex) => {
     const rowEl = container.querySelector(`.velocity-track-row[data-row="${rowIndex}"]`);
@@ -1201,15 +1124,6 @@ function renderGallery(category = 'all') {
   if (!velocityAnimFrame) {
     velocityAnimFrame = requestAnimationFrame(runScrollVelocityLoop);
   }
-
-  // Re-bind gallery tabs
-  document.querySelectorAll('.gal-tab-btn').forEach(btn => {
-    btn.onclick = (e) => {
-      document.querySelectorAll('.gal-tab-btn').forEach(b => b.classList.remove('active'));
-      e.currentTarget.classList.add('active');
-      renderGallery(e.currentTarget.dataset.tab);
-    };
-  });
 }
 
 function getTrackWrapWidth(track) {
@@ -1234,7 +1148,6 @@ function initTrackPointerEvents(rowElement, trackObj) {
     startY = e.clientY;
     axis = null;
     dragStartX = trackObj.x;
-    // don't freeze the track until we know this is a horizontal drag
     trackObj.isDragging = false;
   });
 
@@ -1298,23 +1211,6 @@ function runScrollVelocityLoop(timestamp) {
   const dt = Math.min(Math.max(rawDt, 0.001), 0.032);
   lastAnimTimestamp = timestamp;
 
-  // Spring physics simulation matching Framer Motion (stiffness: 80, damping: 40)
-  const stiffness = 80;
-  const damping = 40;
-  const force = -stiffness * (smoothScrollVelocity - rawScrollVelocity);
-  const dampingForce = -damping * smoothScrollVelocity;
-  smoothScrollVelocity += (force + dampingForce) * dt;
-
-  // Natural velocity decay
-  rawScrollVelocity *= Math.max(0, 1 - dt * 6);
-
-  // Kill micro-oscillations that cause visible jitter
-  if (Math.abs(rawScrollVelocity) < 6) rawScrollVelocity = 0;
-  if (Math.abs(smoothScrollVelocity) < 6) smoothScrollVelocity = 0;
-
-  // Velocity factor transform: map velocity to [0, 4] range
-  const velocityFactor = Math.min(Math.max(smoothScrollVelocity / 1200, -4), 4);
-
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   velocityTracksData.forEach(track => {
@@ -1322,20 +1218,10 @@ function runScrollVelocityLoop(timestamp) {
     if (reduceMotion) return;
 
     const isHovered = track.rowElement.matches(':hover');
-    const hoverFactor = isHovered ? 0.15 : 1.0;
+    const hoverFactor = isHovered ? 0.2 : 1.0;
 
-    // Calculate delta movement
-    let moveBy = track.direction * track.baseSpeed * dt;
-
-    if (Math.abs(velocityFactor) > 0.02) {
-      let boost = track.direction * Math.abs(velocityFactor) * track.baseSpeed * 1.5 * dt;
-      if (velocityFactor < 0) {
-        boost = -boost;
-      }
-      moveBy += boost;
-    }
-
-    moveBy *= hoverFactor;
+    // Constant smooth glide
+    let moveBy = track.direction * track.baseSpeed * dt * hoverFactor;
     track.x += moveBy;
 
     // Stable, mathematically exact boundary wrap
