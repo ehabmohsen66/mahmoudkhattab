@@ -1223,7 +1223,8 @@ function initTrackPointerEvents(rowElement, trackObj) {
       if (trackObj.x <= -wrapWidth) trackObj.x += wrapWidth;
       else if (trackObj.x >= 0) trackObj.x -= wrapWidth;
     }
-    trackObj.innerElement.style.transform = `translate3d(${trackObj.x}px, 0, 0)`;
+    const dpr = window.devicePixelRatio || 1;
+    trackObj.innerElement.style.transform = `translate3d(${Math.round(trackObj.x * dpr) / dpr}px, 0, 0)`;
   });
 
   const endDrag = () => {
@@ -1257,6 +1258,10 @@ function runScrollVelocityLoop(timestamp) {
 
   // Natural velocity decay
   rawScrollVelocity *= Math.max(0, 1 - dt * 7);
+
+  // Kill micro-oscillations that cause visible jitter
+  if (Math.abs(rawScrollVelocity) < 5) rawScrollVelocity = 0;
+  if (Math.abs(smoothScrollVelocity) < 5) smoothScrollVelocity = 0;
 
   // Velocity factor transform: map velocity to [0, 5] range
   const velocityFactor = Math.min(Math.max(smoothScrollVelocity / 1200, -5), 5);
@@ -1294,7 +1299,10 @@ function runScrollVelocityLoop(timestamp) {
       }
     }
 
-    track.innerElement.style.transform = `translate3d(${track.x}px, 0, 0)`;
+    // Round to device pixels to prevent sub-pixel jitter on mobile
+    const dpr = window.devicePixelRatio || 1;
+    const snappedX = Math.round(track.x * dpr) / dpr;
+    track.innerElement.style.transform = `translate3d(${snappedX}px, 0, 0)`;
   });
 
   velocityAnimFrame = requestAnimationFrame(runScrollVelocityLoop);
