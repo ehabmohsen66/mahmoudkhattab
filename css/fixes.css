@@ -807,42 +807,36 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 /* ---------- 23. Stable, Jitter-Free Velocity Slider Cards ---------- */
-/* The track inner is ~7600px wide. Promoting it to a composited layer on a
-   3x-DPR phone needs ~51MB of GPU texture PER ROW (~153MB for three rows),
-   which mobile GPUs refuse to allocate as one layer. The browser then falls
-   back to tiled re-rasterisation every frame = the "vibrating" gallery.
-   So: promote the layer on desktop only, and let mobile skip painting the
-   off-screen cards entirely via content-visibility. */
+.velocity-track-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  gap: 18px !important;
+  width: max-content !important;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
 .velocity-card {
   flex: 0 0 350px !important;
   width: 350px !important;
   height: 245px !important;
-}
-
-@media (min-width: 769px) {
-  .velocity-track-inner {
-    will-change: transform;
-  }
-  .velocity-card {
-    contain: layout paint;
-  }
+  overflow: hidden !important;
+  contain: layout paint;
 }
 
 @media (max-width: 768px) {
+  .velocity-track-inner {
+    gap: 12px !important;
+    will-change: transform;
+    transform: translateZ(0);
+  }
   .velocity-card {
     flex: 0 0 275px !important;
     width: 275px !important;
     height: 195px !important;
-    /* hover never fires on touch — the transition only fights the RAF loop */
+    overflow: hidden !important;
     transition: none !important;
-    /* skip rasterising cards that are scrolled out of view; the intrinsic
-       size keeps layout (and therefore the wrap width) stable */
-    content-visibility: auto;
-    contain-intrinsic-size: 275px 195px;
-  }
-  /* no will-change / translateZ / backface-visibility here on purpose:
-     each one forces another composited layer and makes the thrashing worse */
-  .velocity-track-inner {
-    will-change: auto;
+    contain: layout paint;
   }
 }

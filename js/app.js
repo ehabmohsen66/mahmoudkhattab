@@ -959,6 +959,8 @@ let smoothScrollVelocity = 0;
 let lastScrollTimestamp = performance.now();
 let lastAnimTimestamp = performance.now();
 let isScrollVelocityListenerBound = false;
+let galleryObserver = null;
+let isGalleryInView = true;
 
 function getCategoryLabel(cat) {
   const labels = {
@@ -975,19 +977,23 @@ function initScrollVelocityListener() {
   if (isScrollVelocityListenerBound) return;
   isScrollVelocityListenerBound = true;
 
-  // Ignore tiny scroll deltas caused by layout shifts from lazy-loading images
   window.addEventListener('scroll', () => {
+    if (!isGalleryInView) return;
+
     const now = performance.now();
     const currentY = window.scrollY || window.pageYOffset || 0;
-    const dt = Math.max((now - lastScrollTimestamp) / 1000, 0.008);
+    const dt = Math.max((now - lastScrollTimestamp) / 1000, 0.016);
     const dy = currentY - lastScrollY;
-    // Filter out micro-scrolls (< 2px) caused by image load layout shifts
-    if (Math.abs(dy) < 2) {
+
+    // Filter out micro-scrolls and layout shifts
+    if (Math.abs(dy) < 3) {
       lastScrollY = currentY;
       lastScrollTimestamp = now;
       return;
     }
-    rawScrollVelocity = dy / dt;
+
+    const instantVelocity = dy / dt;
+    rawScrollVelocity = Math.min(Math.max(instantVelocity, -2500), 2500);
     lastScrollY = currentY;
     lastScrollTimestamp = now;
   }, { passive: true });
@@ -1001,6 +1007,10 @@ function renderGallery(category = 'all') {
   if (velocityAnimFrame) {
     cancelAnimationFrame(velocityAnimFrame);
     velocityAnimFrame = null;
+  }
+  if (galleryObserver) {
+    galleryObserver.disconnect();
+    galleryObserver = null;
   }
   velocityTracksData = [];
 
@@ -1162,7 +1172,6 @@ function renderGallery(category = 'all') {
         baseSpeed: row.baseSpeed,
         repeat: row.repeat,
         itemCount: row.items.length,
-        singleSetWidth: 0,
         x: row.direction === 1 ? -100 : 0,
         isDragging: false
       };
@@ -1171,8 +1180,27 @@ function renderGallery(category = 'all') {
     }
   });
 
+  // IntersectionObserver: ONLY animate when gallery is in/near viewport
+  galleryObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      isGalleryInView = entry.isIntersecting;
+      if (isGalleryInView) {
+        lastAnimTimestamp = performance.now();
+        if (!velocityAnimFrame) {
+          velocityAnimFrame = requestAnimationFrame(runScrollVelocityLoop);
+        }
+      }
+    });
+  }, { rootMargin: '300px 0px' });
+
+  galleryObserver.observe(container);
+
+  // Initial animation start
+  isGalleryInView = true;
   lastAnimTimestamp = performance.now();
-  velocityAnimFrame = requestAnimationFrame(runScrollVelocityLoop);
+  if (!velocityAnimFrame) {
+    velocityAnimFrame = requestAnimationFrame(runScrollVelocityLoop);
+  }
 
   // Re-bind gallery tabs
   document.querySelectorAll('.gal-tab-btn').forEach(btn => {
@@ -1185,34 +1213,10 @@ function renderGallery(category = 'all') {
 }
 
 function getTrackWrapWidth(track) {
-  if (track.singleSetWidth && track.singleSetWidth > 200) {
-    return track.singleSetWidth;
-  }
-  if (track.innerElement) {
-    const cards = track.innerElement.querySelectorAll('.velocity-card');
-    if (cards.length > 0 && track.itemCount && cards.length >= track.itemCount * 2) {
-      const firstCard = cards[0];
-      const nextSetFirstCard = cards[track.itemCount];
-      if (firstCard && nextSetFirstCard) {
-        const offsetDist = nextSetFirstCard.offsetLeft - firstCard.offsetLeft;
-        if (offsetDist > 200) {
-          track.singleSetWidth = offsetDist;
-          return offsetDist;
-        }
-      }
-    }
-    const scrollW = track.innerElement.scrollWidth;
-    if (scrollW > 500 && track.repeat) {
-      const calculated = scrollW / track.repeat;
-      if (calculated > 200) {
-        track.singleSetWidth = calculated;
-        return calculated;
-      }
-    }
-  }
   const isMobile = window.innerWidth <= 768;
-  const cardW = isMobile ? (275 + 18) : (350 + 18);
-  return (track.itemCount || 30) * cardW;
+  const cardW = isMobile ? 275 : 350;
+  const gap = isMobile ? 12 : 18;
+  return (track.itemCount || 30) * (cardW + gap);
 }
 
 function initTrackPointerEvents(rowElement, trackObj) {
@@ -1230,8 +1234,7 @@ function initTrackPointerEvents(rowElement, trackObj) {
     startY = e.clientY;
     axis = null;
     dragStartX = trackObj.x;
-    // don't freeze the track until we know this is a horizontal drag, otherwise
-    // a plain vertical page scroll stops the row and jiggles it with finger wobble
+    // don't freeze the track until we know this is a horizontal drag
     trackObj.isDragging = false;
   });
 
@@ -1286,25 +1289,31 @@ function initTrackPointerEvents(rowElement, trackObj) {
 }
 
 function runScrollVelocityLoop(timestamp) {
-  const dt = Math.min((timestamp - lastAnimTimestamp) / 1000, 0.05);
+  if (!isGalleryInView) {
+    velocityAnimFrame = null;
+    return;
+  }
+
+  const rawDt = (timestamp - lastAnimTimestamp) / 1000;
+  const dt = Math.min(Math.max(rawDt, 0.001), 0.032);
   lastAnimTimestamp = timestamp;
 
-  // Spring physics simulation matching Framer Motion (stiffness: 100, damping: 50)
-  const stiffness = 100;
-  const damping = 50;
+  // Spring physics simulation matching Framer Motion (stiffness: 80, damping: 40)
+  const stiffness = 80;
+  const damping = 40;
   const force = -stiffness * (smoothScrollVelocity - rawScrollVelocity);
   const dampingForce = -damping * smoothScrollVelocity;
   smoothScrollVelocity += (force + dampingForce) * dt;
 
   // Natural velocity decay
-  rawScrollVelocity *= Math.max(0, 1 - dt * 7);
+  rawScrollVelocity *= Math.max(0, 1 - dt * 6);
 
   // Kill micro-oscillations that cause visible jitter
-  if (Math.abs(rawScrollVelocity) < 5) rawScrollVelocity = 0;
-  if (Math.abs(smoothScrollVelocity) < 5) smoothScrollVelocity = 0;
+  if (Math.abs(rawScrollVelocity) < 6) rawScrollVelocity = 0;
+  if (Math.abs(smoothScrollVelocity) < 6) smoothScrollVelocity = 0;
 
-  // Velocity factor transform: map velocity to [0, 5] range
-  const velocityFactor = Math.min(Math.max(smoothScrollVelocity / 1200, -5), 5);
+  // Velocity factor transform: map velocity to [0, 4] range
+  const velocityFactor = Math.min(Math.max(smoothScrollVelocity / 1200, -4), 4);
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1329,7 +1338,7 @@ function runScrollVelocityLoop(timestamp) {
     moveBy *= hoverFactor;
     track.x += moveBy;
 
-    // Stable, jitter-free boundary wrap
+    // Stable, mathematically exact boundary wrap
     const wrapWidth = getTrackWrapWidth(track);
     if (wrapWidth > 100) {
       if (track.x <= -wrapWidth) {
