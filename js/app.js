@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollEffects();
   initContactChooser();
   initHeroGallery();
+  initHeroVideo();
   initBackToTop();
 });
 
@@ -312,6 +313,25 @@ function initHeroGallery() {
 
   showSlide(0);
   startRotation();
+}
+
+function initHeroVideo() {
+  const video = document.querySelector('.hero-egypt-animation');
+  if (!video) return;
+
+  if (video.dataset.src && !video.src) {
+    video.src = video.dataset.src;
+  }
+
+  const playVideo = () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {});
+    }
+  };
+
+  playVideo();
+  window.addEventListener('touchstart', playVideo, { once: true, passive: true });
 }
 
 function applyTranslations(lang) {
