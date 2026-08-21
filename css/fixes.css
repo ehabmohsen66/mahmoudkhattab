@@ -761,24 +761,49 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 }
 
-/* ---------- 22. Destinations Heading & Sarcophagus Box Fix ---------- */
+/* ---------- 22. Destinations Mummy / Sarcophagus (100% Transparent) ---------- */
 .destinations-heading-layout {
-  display: block !important;
-  text-align: center !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 220px !important;
+  align-items: center !important;
+  gap: 24px !important;
   margin-bottom: 32px !important;
 }
 .destinations-heading-layout .section-header {
-  max-width: 820px !important;
-  margin: 0 auto !important;
-  text-align: center !important;
+  max-width: 780px !important;
+  margin: 0 !important;
+  text-align: left !important;
 }
 .destinations-heading-layout .section-header .section-tag {
-  justify-content: center !important;
-  margin-inline: auto !important;
+  justify-content: flex-start !important;
+  margin-inline: 0 !important;
 }
 .destinations-sarcophagus {
-  display: none !important;
-  visibility: hidden !important;
+  display: block !important;
+  visibility: visible !important;
+  width: 190px !important;
+  height: 190px !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  mix-blend-mode: multiply !important;
+  filter: drop-shadow(0 10px 18px rgba(7, 91, 120, 0.12)) !important;
+  margin-left: auto !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 900px) {
+  .destinations-heading-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    text-align: left !important;
+  }
+  .destinations-sarcophagus {
+    width: 140px !important;
+    height: 140px !important;
+    margin: 0 auto !important;
+  }
 }
 
 /* ---------- 23. Stable, Jitter-Free Velocity Slider Cards ---------- */
