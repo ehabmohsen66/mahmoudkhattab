@@ -117,6 +117,10 @@ function initLanguage() {
     btn.addEventListener('click', (e) => {
       const targetLang = e.currentTarget.dataset.lang;
       setLanguage(targetLang, true);
+      const links = document.getElementById('nav-links');
+      if (links && links.classList.contains('active')) {
+        links.classList.remove('active');
+      }
     });
   });
 
@@ -1391,7 +1395,7 @@ function initMobileNav() {
       links.classList.toggle('active');
     };
 
-    document.querySelectorAll('.nav-link').forEach(l => {
+    document.querySelectorAll('.nav-link, .drawer-lang .lang-btn').forEach(l => {
       l.onclick = () => {
         links.classList.remove('active');
       };
