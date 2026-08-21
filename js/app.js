@@ -116,11 +116,15 @@ function initLanguage() {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
     btn.addEventListener('click', (e) => {
       const targetLang = e.currentTarget.dataset.lang;
-      setLanguage(targetLang, true);
+      // Close the drawer BEFORE switching language. setLanguage() re-renders the
+      // destinations, reviews and the whole gallery, which blocks the main thread
+      // for ~1s on a phone — if we closed afterwards the menu would sit visibly
+      // frozen open, still showing the previous language, for that whole time.
       const links = document.getElementById('nav-links');
       if (links && links.classList.contains('active')) {
         links.classList.remove('active');
       }
+      setLanguage(targetLang, true);
     });
   });
 
@@ -164,6 +168,9 @@ function initContactChooser() {
   });
 }
 
+// Guards the deferred re-render below so a rapid second language tap wins.
+let langRenderToken = 0;
+
 function setLanguage(lang, updateUrl = true) {
   if (currentLang === lang && !updateUrl) return;
   currentLang = lang;
@@ -188,16 +195,26 @@ function setLanguage(lang, updateUrl = true) {
   }
 
   applyTranslations(lang);
-  
-  // Re-render dynamic components in new language
-  const activeDestTab = document.querySelector('.dest-tab-btn.active')?.dataset.tab || 'all';
-  renderDestinations(activeDestTab);
-  
-  renderReviews();
-  
-  const activeGalTab = document.querySelector('.gal-tab-btn.active')?.dataset.tab || 'all';
-  renderGallery(activeGalTab);
-  updateHeroGalleryCaption();
+
+  // The three render* calls below rebuild the destinations, the reviews and all
+  // ~78 gallery cards. That is roughly a second of blocked main thread on a
+  // phone. Run it after the browser has painted the closed menu and the newly
+  // translated text, so the UI responds instantly instead of freezing.
+  const token = ++langRenderToken;
+  const renderDynamic = () => {
+    if (token !== langRenderToken) return; // a newer language switch superseded this one
+    const activeDestTab = document.querySelector('.dest-tab-btn.active')?.dataset.tab || 'all';
+    renderDestinations(activeDestTab);
+
+    renderReviews();
+
+    const activeGalTab = document.querySelector('.gal-tab-btn.active')?.dataset.tab || 'all';
+    renderGallery(activeGalTab);
+    updateHeroGalleryCaption();
+  };
+
+  // double rAF -> guarantees one painted frame before the heavy work starts
+  requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(renderDynamic, 0)));
 }
 
 function updateHeroGalleryCaption() {
@@ -1089,7 +1106,7 @@ function renderGallery(category = 'all') {
 
         html += `
           <div class="velocity-card" onclick="openLightbox(${openIdx})" data-id="${item.id}" role="button" tabindex="0" aria-label="${escapeAttr(title)}">
-            <img src="${isVideo ? item.poster : item.src}" alt="${escapeAttr(title)}" class="velocity-card-img" loading="lazy" draggable="false">
+            <img src="${isVideo ? item.poster : item.src}" alt="${escapeAttr(title)}" class="velocity-card-img" loading="lazy" decoding="async" fetchpriority="low" width="350" height="245" draggable="false">
             <span class="velocity-card-tag">${catLabel}</span>
             ${isVideo ? `
               <div class="velocity-video-badge">
@@ -1200,6 +1217,8 @@ function getTrackWrapWidth(track) {
 
 function initTrackPointerEvents(rowElement, trackObj) {
   let startX = 0;
+  let startY = 0;
+  let axis = null;
   let dragStartX = 0;
   let isDown = false;
   let hasMoved = false;
@@ -1208,13 +1227,33 @@ function initTrackPointerEvents(rowElement, trackObj) {
     isDown = true;
     hasMoved = false;
     startX = e.clientX;
+    startY = e.clientY;
+    axis = null;
     dragStartX = trackObj.x;
-    trackObj.isDragging = true;
+    // don't freeze the track until we know this is a horizontal drag, otherwise
+    // a plain vertical page scroll stops the row and jiggles it with finger wobble
+    trackObj.isDragging = false;
   });
 
   window.addEventListener('pointermove', (e) => {
     if (!isDown) return;
     const diff = e.clientX - startX;
+    const diffY = e.clientY - startY;
+
+    // Lock the gesture to one axis on first meaningful movement.
+    if (!axis) {
+      if (Math.abs(diff) < 8 && Math.abs(diffY) < 8) return;
+      axis = Math.abs(diff) > Math.abs(diffY) ? 'x' : 'y';
+      if (axis === 'x') {
+        trackObj.isDragging = true;
+        dragStartX = trackObj.x;
+        startX = e.clientX;
+        return;
+      }
+    }
+    // Vertical page scroll: leave the row alone.
+    if (axis === 'y') return;
+
     if (Math.abs(diff) > 6) hasMoved = true;
     trackObj.x = dragStartX + diff;
 
@@ -1230,6 +1269,7 @@ function initTrackPointerEvents(rowElement, trackObj) {
   const endDrag = () => {
     if (!isDown) return;
     isDown = false;
+    axis = null;
     trackObj.isDragging = false;
   };
 
