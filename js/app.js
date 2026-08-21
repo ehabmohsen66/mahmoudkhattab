@@ -958,11 +958,18 @@ function initScrollVelocityListener() {
   if (isScrollVelocityListenerBound) return;
   isScrollVelocityListenerBound = true;
 
+  // Ignore tiny scroll deltas caused by layout shifts from lazy-loading images
   window.addEventListener('scroll', () => {
     const now = performance.now();
     const currentY = window.scrollY || window.pageYOffset || 0;
     const dt = Math.max((now - lastScrollTimestamp) / 1000, 0.008);
     const dy = currentY - lastScrollY;
+    // Filter out micro-scrolls (< 2px) caused by image load layout shifts
+    if (Math.abs(dy) < 2) {
+      lastScrollY = currentY;
+      lastScrollTimestamp = now;
+      return;
+    }
     rawScrollVelocity = dy / dt;
     lastScrollY = currentY;
     lastScrollTimestamp = now;
@@ -1187,7 +1194,7 @@ function getTrackWrapWidth(track) {
     }
   }
   const isMobile = window.innerWidth <= 768;
-  const cardW = isMobile ? (275 + 12) : (350 + 18);
+  const cardW = isMobile ? (275 + 18) : (350 + 18);
   return (track.itemCount || 30) * cardW;
 }
 

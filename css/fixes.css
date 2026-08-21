@@ -821,5 +821,14 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     flex: 0 0 275px !important;
     width: 275px !important;
     height: 195px !important;
+    /* Kill hover transition on mobile — it conflicts with RAF-driven parent transform and causes 60s jitter */
+    transition: none !important;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .velocity-track-inner {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
   }
 }
