@@ -816,14 +816,17 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   animation-delay: calc(var(--i) * -3.25s) !important;
 }
 
-.hero-egypt-icon {
-  width: 100% !important;
-  height: 100% !important;
+.hero-egypt-img {
+  width: 60px !important;
+  height: 60px !important;
   display: block !important;
-  overflow: visible !important;
-  filter: drop-shadow(0 3px 6px rgba(184, 137, 40, 0.25)) !important;
-  animation: egyptBob 2.6s ease-in-out infinite alternate;
-  animation-delay: calc(var(--i) * -0.4s);
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #fff;
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  /* The runner handles horizontal drift, the img handles the vertical bobbing */
+  animation: egyptBob 3s ease-in-out infinite alternate !important;
 }
 
 @keyframes egyptDriftAcross {
@@ -834,13 +837,13 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 @keyframes egyptBob {
-  from { transform: translateY(2px) rotate(-2deg); }
-  to   { transform: translateY(-3px) rotate(2deg); }
+  0%   { transform: translateY(3px) rotate(-2deg); }
+  100% { transform: translateY(-3px) rotate(2deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-egypt-runner,
-  .hero-egypt-icon {
+  .hero-egypt-img {
     animation: none !important;
   }
   .hero-egypt-runner {
