@@ -64,7 +64,7 @@
   <link rel="stylesheet" href="css/responsive.css?v=20260822a">
   <link rel="stylesheet" href="css/redesign.css?v=20260822a">
   <link rel="stylesheet" href="css/human-redesign.css?v=20260822a">
-  <link rel="stylesheet" href="css/fixes.css?v=20260822h">
+  <link rel="stylesheet" href="css/fixes.css?v=20260822i">
   <script src="https://cdn.jsdelivr.net/npm/@dotlottie/player-component@v1.3.0/dist/dotlottie-player.js" defer></script>
 
   <!-- Schema.org JSON-LD -->
@@ -208,73 +208,91 @@
 
         <!-- Hero Content Column -->
         <div class="hero-content">
-          <!-- Running Egyptian Camel Animation (Starts at window left and runs to right) -->
-          <div class="hero-camel-track" aria-hidden="true">
-            <div class="hero-camel-runner">
-              <svg class="camel-svg" viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Dust particles -->
-                <g class="camel-dust-trail">
-                  <circle class="dust-p1" cx="24" cy="98" r="3.2" fill="#c69214"/>
-                  <circle class="dust-p2" cx="14" cy="101" r="4.2" fill="#d4af37"/>
-                  <circle class="dust-p3" cx="6" cy="103" r="2.8" fill="#e8e3da"/>
-                </g>
+          <!-- Egyptian icons drifting across the hero, left to right -->
+          <div class="hero-egypt-track" aria-hidden="true">
 
-                <!-- Back Legs (far side) -->
-                <g class="camel-leg camel-leg-back-far">
-                  <path d="M 68 62 Q 74 78 72 90 Q 70 98 76 104 L 70 105 Q 64 96 66 86 Q 64 74 62 64 Z" fill="#9e7522"/>
-                </g>
-                <g class="camel-leg camel-leg-front-far">
-                  <path d="M 108 58 Q 112 74 114 88 Q 116 98 122 104 L 117 105 Q 109 96 107 84 Q 104 70 102 58 Z" fill="#9e7522"/>
-                </g>
-
-                <!-- Main Body, Hump, Neck & Head -->
-                <g class="camel-body-group">
-                  <!-- Tail with tuft -->
-                  <g class="camel-tail">
-                    <path d="M 52 54 Q 44 64 42 78" stroke="#b88928" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M 42 76 Q 38 84 43 88 Q 46 84 43 78 Z" fill="#7a5511"/>
-                  </g>
-
-                  <!-- Torso & Hump -->
-                  <path d="M 52 54 C 50 46 54 40 62 38 C 70 20 90 20 96 38 C 104 40 110 46 112 56 C 114 66 106 72 98 72 C 86 74 72 74 60 70 C 52 66 50 60 52 54 Z" fill="#c69214"/>
-
-                  <!-- Egyptian Saddle Blanket / Ornamental Cloth -->
-                  <path d="M 72 38 C 78 30 90 30 94 42 L 96 58 C 96 60 94 62 92 62 L 72 62 C 70 62 68 60 68 58 L 70 42 Z" fill="#087ea4"/>
-                  <!-- Saddle Gold Trim & Fringe -->
-                  <path d="M 69 58 L 95 58" stroke="#fcd34d" stroke-width="2.5"/>
-                  <line x1="72" y1="58" x2="72" y2="64" stroke="#fcd34d" stroke-width="1.5"/>
-                  <line x1="76" y1="58" x2="76" y2="65" stroke="#fcd34d" stroke-width="1.5"/>
-                  <line x1="80" y1="58" x2="80" y2="64" stroke="#fcd34d" stroke-width="1.5"/>
-                  <line x1="84" y1="58" x2="84" y2="65" stroke="#fcd34d" stroke-width="1.5"/>
-                  <line x1="88" y1="58" x2="88" y2="64" stroke="#fcd34d" stroke-width="1.5"/>
-                  <line x1="92" y1="58" x2="92" y2="65" stroke="#fcd34d" stroke-width="1.5"/>
-
-                  <!-- Neck & Head -->
-                  <g class="camel-head-neck">
-                    <!-- Graceful arched neck -->
-                    <path d="M 108 58 C 114 50 120 40 126 28 C 128 24 132 20 138 22 C 146 22 152 25 156 28 C 158 30 156 34 150 36 C 142 38 138 34 135 34 C 130 46 124 58 116 68 Z" fill="#c69214"/>
-                    <!-- Ear -->
-                    <path d="M 135 21 C 136 17 139 16 141 19 C 140 22 138 23 135 21 Z" fill="#9e7522"/>
-                    <!-- Eye -->
-                    <circle cx="145" cy="27" r="1.6" fill="#1e1e1e"/>
-                    <circle cx="145.5" cy="26.5" r="0.6" fill="#ffffff"/>
-                    <!-- Nostril / Mouth contour -->
-                    <path d="M 152 33 Q 155 32 156 30" stroke="#7a5511" stroke-width="1.2" stroke-linecap="round"/>
-                    <!-- Traditional desert reins / halter (gold thread) -->
-                    <path d="M 141 24 Q 146 30 152 31" stroke="#fcd34d" stroke-width="1" fill="none"/>
-                    <path d="M 143 27 Q 138 38 128 48" stroke="#fcd34d" stroke-width="0.9" stroke-dasharray="2,2" fill="none"/>
-                  </g>
-                </g>
-
-                <!-- Front Legs (near side) -->
-                <g class="camel-leg camel-leg-back-near">
-                  <path d="M 58 64 Q 54 78 58 90 Q 62 100 56 105 L 62 106 Q 70 98 66 86 Q 66 74 68 64 Z" fill="#c69214"/>
-                </g>
-                <g class="camel-leg camel-leg-front-near">
-                  <path d="M 114 60 Q 120 74 116 88 Q 112 98 118 105 L 124 105 Q 122 96 122 84 Q 120 70 118 60 Z" fill="#c69214"/>
-                </g>
+            <!-- Pyramids of Giza -->
+            <div class="hero-egypt-runner" style="--i:0">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M13 19 22 38H4Z" fill="currentColor" opacity=".45"/>
+                <path d="M36 22 46 38H26Z" fill="currentColor" opacity=".35"/>
+                <path d="M25 7 41 38H9Z" fill="currentColor" opacity=".9"/>
+                <path d="M25 7 25 38" stroke="currentColor" stroke-width="1.4" opacity=".35"/>
+                <path d="M3 40h42" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity=".45"/>
               </svg>
             </div>
+
+            <!-- Felucca on the Nile -->
+            <div class="hero-egypt-runner" style="--i:1">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M25 6v28" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".8"/>
+                <path d="M26 9 40 33H26Z" fill="currentColor" opacity=".9"/>
+                <path d="M23 15 12 33h11Z" fill="currentColor" opacity=".55"/>
+                <path d="M6 35h36l-5 7H11Z" fill="currentColor" opacity=".85"/>
+                <path d="M4 45h40" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
+              </svg>
+            </div>
+
+            <!-- Ankh -->
+            <div class="hero-egypt-runner" style="--i:2">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <ellipse cx="24" cy="15" rx="8" ry="10" stroke="currentColor" stroke-width="4.2"/>
+                <path d="M24 25v18M14 30h20" stroke="currentColor" stroke-width="4.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <!-- Hot-air balloon over Luxor -->
+            <div class="hero-egypt-runner" style="--i:3">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M24 4c8 0 13 6.5 13 13 0 7-6 12-9 15h-8c-3-3-9-8-9-15C11 10.5 16 4 24 4Z" fill="currentColor" opacity=".9"/>
+                <path d="M24 4c3.4 0 5 6.5 5 13 0 7-2.4 12-5 15-2.6-3-5-8-5-15 0-6.5 1.6-13 5-13Z" fill="currentColor" opacity=".35"/>
+                <path d="M20 33l-2 5M28 33l2 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".7"/>
+                <rect x="19" y="37" width="10" height="7" rx="1.6" fill="currentColor" opacity=".85"/>
+              </svg>
+            </div>
+
+            <!-- Obelisk -->
+            <div class="hero-egypt-runner" style="--i:4">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M20 40 21.5 12 24 5l2.5 7L28 40Z" fill="currentColor" opacity=".9"/>
+                <path d="M24 5v35" stroke="currentColor" stroke-width="1.2" opacity=".3"/>
+                <rect x="16" y="40" width="16" height="4" rx="1" fill="currentColor" opacity=".7"/>
+                <path d="M12 45h24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
+              </svg>
+            </div>
+
+            <!-- Scarab -->
+            <div class="hero-egypt-runner" style="--i:5">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <ellipse cx="24" cy="27" rx="10" ry="13" fill="currentColor" opacity=".9"/>
+                <path d="M24 15v24" stroke="currentColor" stroke-width="1.3" opacity=".35"/>
+                <ellipse cx="24" cy="12" rx="6" ry="5" fill="currentColor" opacity=".8"/>
+                <path d="M14 19 6 14M14 27H5M15 34l-7 5M34 19l8-5M34 27h9M33 34l7 5"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+              </svg>
+            </div>
+
+            <!-- Lotus -->
+            <div class="hero-egypt-runner" style="--i:6">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M24 8c3.5 5 5 10 5 15s-1.5 9-5 13c-3.5-4-5-8-5-13s1.5-10 5-15Z" fill="currentColor" opacity=".9"/>
+                <path d="M13 16c4 3 6.5 7 7.5 11.5S21 36 19 40c-4-2.5-6.5-6-7.5-10.5S11 20 13 16Z" fill="currentColor" opacity=".6"/>
+                <path d="M35 16c2 4 3 9 2 13.5S32.5 37.5 29 40c-2-4-2.5-8-1.5-12.5S31 19 35 16Z" fill="currentColor" opacity=".6"/>
+                <path d="M8 41h32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+              </svg>
+            </div>
+
+            <!-- Eye of Horus -->
+            <div class="hero-egypt-runner" style="--i:7">
+              <svg class="hero-egypt-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M5 24c6-8 13-12 19-12s12 4 16 10c-5 7-11 11-17 11S10 30 5 24Z"
+                      stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/>
+                <circle cx="23" cy="24" r="4.6" fill="currentColor"/>
+                <path d="M17 34c-1 5-4 8-8 8" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+                <path d="M27 34c1 4 1 7 0 9" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
           </div>
 
           <div class="hero-title-row">

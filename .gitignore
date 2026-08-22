@@ -35,3 +35,5 @@ minimizing-vertical-view-*.jpg
 
 # ---- Agent scratch ------------------------------------------------------
 .agent/
+_claude_backup/
+*.claude-stale

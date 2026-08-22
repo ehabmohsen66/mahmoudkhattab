@@ -785,8 +785,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   color: var(--muted, #4e6068) !important;
 }
 
-/* --- Running Egyptian Camel Animation (Traversing Window Left to Right) --- */
-.hero-camel-track {
+/* --- Egyptian icons drifting across the hero (left to right) --- */
+.hero-egypt-track {
   position: relative !important;
   width: 100vw !important;
   left: 50% !important;
@@ -798,117 +798,54 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   pointer-events: none !important;
   z-index: 5 !important;
   margin-bottom: 8px !important;
+  color: #C98A2E;  /* every icon inherits this - change here to re-tint them all */
 }
 
-.hero-camel-runner {
+.hero-egypt-runner {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
-  width: 78px !important;
+  width: 46px !important;
   height: 52px !important;
-  will-change: transform;
-  animation: camelRunAcross 12s linear infinite !important;
+  opacity: 0;
+  will-change: transform, opacity;
+  /* 8 icons share one 26s lap, so they sit 26/8 = 3.25s apart. The delays are
+     NEGATIVE so the sequence starts already in flight - otherwise the strip
+     would be empty for the first few seconds after load. */
+  animation: egyptDriftAcross 26s linear infinite;
+  animation-delay: calc(var(--i) * -3.25s) !important;
 }
 
-.camel-svg {
+.hero-egypt-icon {
   width: 100% !important;
   height: 100% !important;
   display: block !important;
   overflow: visible !important;
   filter: drop-shadow(0 3px 6px rgba(184, 137, 40, 0.25)) !important;
+  animation: egyptBob 2.6s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * -0.4s);
 }
 
-/* Camel Limb & Body Animations */
-.camel-body-group {
-  transform-origin: 85px 65px;
-  animation: camelBodyBob 0.6s ease-in-out infinite alternate;
+@keyframes egyptDriftAcross {
+  0%   { transform: translateX(-80px); opacity: 0; }
+  7%   { opacity: 0.95; }
+  90%  { opacity: 0.95; }
+  100% { transform: translateX(calc(100vw + 80px)); opacity: 0; }
 }
 
-.camel-head-neck {
-  transform-origin: 116px 65px;
-  animation: camelHeadBob 0.6s ease-in-out infinite alternate;
+@keyframes egyptBob {
+  from { transform: translateY(2px) rotate(-2deg); }
+  to   { transform: translateY(-3px) rotate(2deg); }
 }
 
-.camel-tail {
-  transform-origin: 52px 54px;
-  animation: camelTailSway 0.6s ease-in-out infinite alternate;
-}
-
-.camel-leg-front-near {
-  transform-origin: 114px 60px;
-  animation: camelFrontNear 0.6s ease-in-out infinite alternate;
-}
-
-.camel-leg-front-far {
-  transform-origin: 108px 58px;
-  animation: camelFrontFar 0.6s ease-in-out infinite alternate;
-}
-
-.camel-leg-back-near {
-  transform-origin: 58px 64px;
-  animation: camelBackNear 0.6s ease-in-out infinite alternate;
-}
-
-.camel-leg-back-far {
-  transform-origin: 68px 62px;
-  animation: camelBackFar 0.6s ease-in-out infinite alternate;
-}
-
-.camel-dust-trail circle {
-  animation: camelDustPuff 0.6s ease-out infinite;
-}
-.camel-dust-trail .dust-p2 { animation-delay: 0.15s; }
-.camel-dust-trail .dust-p3 { animation-delay: 0.3s; }
-
-@keyframes camelRunAcross {
-  0% {
-    transform: translateX(-100px);
+@media (prefers-reduced-motion: reduce) {
+  .hero-egypt-runner,
+  .hero-egypt-icon {
+    animation: none !important;
   }
-  100% {
-    transform: translateX(calc(100vw + 100px));
+  .hero-egypt-runner {
+    opacity: 0 !important;
   }
-}
-
-@keyframes camelBodyBob {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-2.5px) rotate(-1deg); }
-  100% { transform: translateY(1px) rotate(1deg); }
-}
-
-@keyframes camelHeadBob {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-4deg); }
-}
-
-@keyframes camelTailSway {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-12deg); }
-}
-
-@keyframes camelFrontNear {
-  0% { transform: rotate(-22deg); }
-  100% { transform: rotate(26deg); }
-}
-
-@keyframes camelFrontFar {
-  0% { transform: rotate(26deg); }
-  100% { transform: rotate(-22deg); }
-}
-
-@keyframes camelBackNear {
-  0% { transform: rotate(26deg); }
-  100% { transform: rotate(-20deg); }
-}
-
-@keyframes camelBackFar {
-  0% { transform: rotate(-20deg); }
-  100% { transform: rotate(26deg); }
-}
-
-@keyframes camelDustPuff {
-  0% { opacity: 0.7; transform: scale(0.8) translate(0, 0); }
-  50% { opacity: 0.35; transform: scale(1.2) translate(-6px, -3px); }
-  100% { opacity: 0; transform: scale(1.6) translate(-12px, -6px); }
 }
 
 /* --- Desktop Layout (>= 992px) --- */
@@ -918,15 +855,16 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     padding-bottom: 60px !important;
   }
 
-  .hero-camel-track {
+  .hero-egypt-track {
     height: 60px !important;
     margin-bottom: 10px !important;
   }
 
-  .hero-camel-runner {
-    width: 90px !important;
+  .hero-egypt-runner {
+    width: 54px !important;
     height: 60px !important;
-    animation-duration: 13s !important;
+    animation-duration: 30s !important;
+    animation-delay: calc(var(--i) * -3.75s) !important;
   }
 
   .hero-grid {
@@ -1057,17 +995,18 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     display: contents !important;
   }
 
-  /* Running camel at the top of mobile hero */
-  .hero-camel-track {
+  /* Egyptian icons drifting across the top of the mobile hero */
+  .hero-egypt-track {
     order: 1 !important;
-    height: 48px !important;
+    height: 44px !important;
     margin-bottom: 6px !important;
   }
 
-  .hero-camel-runner {
-    width: 72px !important;
-    height: 48px !important;
-    animation-duration: 11s !important;
+  .hero-egypt-runner {
+    width: 38px !important;
+    height: 44px !important;
+    animation-duration: 22s !important;
+    animation-delay: calc(var(--i) * -2.75s) !important;
   }
 
   .hero-title-row {
