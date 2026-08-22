@@ -527,18 +527,17 @@ h6,
 
 .hero-egypt-animation {
     position: absolute;
-    top: clamp(-220px, -15vw, -175px);
-    right: -6%;
+    top: -145px;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 0;
     display: block;
-    width: 112%;
+    width: 128%;
+    max-width: 660px;
     height: auto;
-    opacity: 0.56;
+    opacity: 0.96;
     pointer-events: none;
-    mix-blend-mode: multiply;
-    filter: saturate(0.78) sepia(0.08);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 82%, transparent 100%);
+    mix-blend-mode: normal;
 }
 
 .hero-badge,
