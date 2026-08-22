@@ -316,7 +316,7 @@ function initHeroGallery() {
 }
 
 function initHeroVideo() {
-  const video = document.querySelector('.hero-egypt-animation');
+  const video = document.querySelector('video.hero-egypt-animation');
   if (!video) return;
 
   if (video.dataset.src && !video.src) {
@@ -324,9 +324,11 @@ function initHeroVideo() {
   }
 
   const playVideo = () => {
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {});
+    if (typeof video.play === 'function') {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
     }
   };
 
