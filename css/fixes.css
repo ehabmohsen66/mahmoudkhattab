@@ -914,35 +914,42 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 
   .hero-tagline {
     font-size: 1.02rem !important;
-    line-height: 1.65 !important;
-    margin: 0 0 18px 0 !important;
+    line-height: 1.6 !important;
+    margin: 0 0 12px 0 !important;
     max-width: 580px !important;
     text-align: left !important;
     color: #4e6068 !important;
   }
 
   .stats-strip--hero {
-    margin: 16px 0 22px !important;
+    margin: 10px 0 14px !important;
     max-width: 560px !important;
   }
 
   .hero-cta-group {
     justify-content: flex-start !important;
     gap: 12px !important;
-    margin-top: 18px !important;
+    margin-top: 12px !important;
   }
 
   .hero-channel-hub {
-    margin-top: 22px !important;
-    text-align: left !important;
+    margin-top: 14px !important;
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .hero-channel-hub .hero-channel-label {
-    text-align: left !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 8px !important;
   }
 
   .hero-channel-hub .hero-channel-icons {
-    justify-content: flex-start !important;
+    justify-content: center !important;
+    width: 100% !important;
   }
 
   .hero-guide-card {
