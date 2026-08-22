@@ -927,12 +927,12 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     right: auto !important;
     bottom: auto !important;
     transform: none !important;
-    width: auto !important;
-    max-width: 320px !important;
-    max-height: 86px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
     height: auto !important;
-    object-fit: contain !important;
-    margin: 0 auto -6px auto !important;
+    object-fit: fill !important;
+    margin: 0 0 -90px 0 !important;
     opacity: 1 !important;
     pointer-events: none !important;
     z-index: 3 !important;
@@ -943,8 +943,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     z-index: 2 !important;
     width: 100% !important;
     aspect-ratio: 16 / 11 !important;
-    min-height: 290px !important;
-    max-height: 350px !important;
+    min-height: 300px !important;
+    max-height: 360px !important;
     border-radius: 18px !important;
     box-shadow: 0 18px 44px rgba(7, 30, 40, 0.22), 0 0 0 1px rgba(212, 175, 55, 0.35) !important;
     overflow: hidden !important;
