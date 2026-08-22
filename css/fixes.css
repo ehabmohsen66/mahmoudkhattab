@@ -890,31 +890,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 
   .hero-lang-feature {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 6px !important;
-    max-width: 440px !important;
-    margin: 12px auto 0 !important;
-  }
-
-  .hero-lang-card {
-    padding: 6px 4px !important;
-    border-radius: 10px !important;
-    text-align: center !important;
-  }
-
-  .hero-lang-card .hero-lang-header {
-    justify-content: center !important;
-    gap: 4px !important;
-  }
-
-  .hero-lang-card .hero-lang-name {
-    font-size: 0.76rem !important;
-  }
-
-  .hero-lang-card .hero-lang-sub {
-    font-size: 0.65rem !important;
-    display: block !important;
+    display: none !important;
   }
 
   .stats-strip--hero {
