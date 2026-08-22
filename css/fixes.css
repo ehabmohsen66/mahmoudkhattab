@@ -922,12 +922,12 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   .hero-egypt-animation {
     display: block !important;
     position: relative !important;
-    width: 70% !important;
-    max-width: 340px !important;
+    width: 100% !important;
+    max-width: 480px !important;
     height: auto !important;
-    max-height: 90px !important;
+    max-height: 130px !important;
     object-fit: contain !important;
-    margin: 0 auto -4px auto !important;
+    margin: 0 auto -2px auto !important;
     opacity: 1 !important;
     pointer-events: none !important;
     z-index: 3 !important;
@@ -1036,12 +1036,12 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   .hero-egypt-animation {
     display: block !important;
     position: relative !important;
-    width: 65% !important;
-    max-width: 260px !important;
+    width: 100% !important;
+    max-width: 400px !important;
     height: auto !important;
-    max-height: 70px !important;
+    max-height: 105px !important;
     object-fit: contain !important;
-    margin: 0 auto -3px auto !important;
+    margin: 0 auto -2px auto !important;
     opacity: 1 !important;
     pointer-events: none !important;
     z-index: 3 !important;
