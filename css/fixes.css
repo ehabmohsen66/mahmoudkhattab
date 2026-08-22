@@ -552,47 +552,60 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 }
 
-/* ---------- 19. Back to Top Button ---------- */
+/* ---------- 19. Back to Top Button: Elevated & Premium Craft ---------- */
 .back-to-top {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
-  width: 46px;
-  height: 46px;
+  right: 28px;
+  bottom: 38px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 1.5px solid var(--line, #d7e7eb);
-  box-shadow: 0 6px 22px rgba(7, 91, 120, 0.16);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(8, 126, 164, 0.24);
+  box-shadow: 0 8px 26px rgba(7, 91, 120, 0.18), 0 2px 8px rgba(0, 0, 0, 0.06);
   color: var(--nile, #087ea4);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  z-index: 840;
+  z-index: 860;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(12px) scale(0.9);
-  transition: opacity .25s ease, transform .25s ease, visibility .25s, background .2s, border-color .2s, box-shadow .2s;
+  transform: translateY(14px) scale(0.9);
+  transition: opacity .25s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform .25s cubic-bezier(0.16, 1, 0.3, 1), 
+              visibility .25s, 
+              background .2s ease, 
+              border-color .2s ease, 
+              box-shadow .2s ease;
   pointer-events: none;
 }
 
 .back-to-top svg {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   stroke: var(--nile, #087ea4);
-  stroke-width: 2.2;
-  transition: transform .2s ease;
+  stroke-width: 2.4;
+  transition: transform .2s ease, stroke .2s ease;
 }
 
 .back-to-top:hover {
-  background: var(--sky, #f0f9fc);
-  border-color: var(--nile, #087ea4);
-  box-shadow: 0 10px 28px rgba(7, 91, 120, 0.24);
-  transform: translateY(-3px) scale(1.06);
+  background: #ffffff;
+  border-color: var(--gold, #d4af37);
+  color: var(--gold, #d4af37);
+  box-shadow: 0 12px 32px rgba(7, 91, 120, 0.28), 0 0 0 2px rgba(212, 175, 55, 0.25);
+  transform: translateY(-4px) scale(1.08);
 }
 
 .back-to-top:hover svg {
-  transform: translateY(-2px);
+  stroke: var(--gold, #d4af37);
+  transform: translateY(-2.5px);
+}
+
+.back-to-top:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .back-to-top.is-visible {
@@ -604,14 +617,16 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 
 @media (max-width: 900px) {
   .back-to-top {
-    bottom: 76px;
-    right: 16px;
-    width: 42px;
-    height: 42px;
+    bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+    right: 18px;
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 6px 20px rgba(7, 91, 120, 0.22);
   }
   .back-to-top svg {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
+    stroke-width: 2.3;
   }
 }
 
