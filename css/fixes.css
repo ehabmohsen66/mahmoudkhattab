@@ -785,98 +785,11 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   color: var(--muted, #4e6068) !important;
 }
 
-/* --- Egyptian icons drifting across the hero (left to right, edge-to-edge) --- */
-.hero-egypt-track {
-  position: relative !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  left: 0 !important;
-  right: 0 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  height: 76px !important;
-  overflow: hidden !important;
-  pointer-events: none !important;
-  z-index: 5 !important;
-  margin-top: 0 !important;
-  margin-bottom: 8px !important;
-}
-
-.hero-egypt-runner {
-  position: absolute !important;
-  top: 50% !important;
-  left: 0 !important;
-  width: 56px !important;
-  height: 56px !important;
-  margin-top: -28px !important;
-  opacity: 0;
-  will-change: transform, opacity;
-  /* 12 icons share one 36s cycle, spaced 36/12 = 3.0s apart */
-  animation: egyptDriftAcross 36s linear infinite;
-  animation-delay: calc(var(--i) * -3s) !important;
-}
-
-.hero-egypt-img {
-  width: 56px !important;
-  height: 56px !important;
-  box-sizing: border-box !important;
-  display: block !important;
-  border-radius: 50%;
-  object-fit: contain;
-  padding: 5px;
-  background-color: #ffffff;
-  border: 2px solid rgba(212, 175, 55, 0.75);
-  box-shadow: 0 4px 14px rgba(7, 30, 40, 0.08), 0 2px 6px rgba(212, 175, 55, 0.2);
-  /* The runner handles horizontal drift, the img handles the vertical bobbing */
-  animation: egyptBob 3s ease-in-out infinite alternate !important;
-}
-
-@keyframes egyptDriftAcross {
-  0%   { transform: translateX(-90px); opacity: 0; }
-  2%   { opacity: 0.96; }
-  98%  { opacity: 0.96; }
-  100% { transform: translateX(calc(100vw + 90px)); opacity: 0; }
-}
-
-@keyframes egyptBob {
-  0%   { transform: translateY(3px) rotate(-1.5deg); }
-  100% { transform: translateY(-3px) rotate(1.5deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-egypt-runner,
-  .hero-egypt-img {
-    animation: none !important;
-  }
-  .hero-egypt-runner {
-    opacity: 0 !important;
-  }
-}
-
 /* --- Desktop Layout (>= 992px) --- */
 @media (min-width: 992px) {
   .hero-section {
-    padding-top: 24px !important;
-    padding-bottom: 60px !important;
-  }
-
-  .hero-egypt-track {
-    height: 80px !important;
-    margin-bottom: 12px !important;
-  }
-
-  .hero-egypt-runner {
-    width: 60px !important;
-    height: 60px !important;
-    margin-top: -30px !important;
-    animation-duration: 36s !important;
-    animation-delay: calc(var(--i) * -3s) !important;
-  }
-
-  .hero-egypt-img {
-    width: 60px !important;
-    height: 60px !important;
-    padding: 6px;
+    padding-top: 36px !important;
+    padding-bottom: 56px !important;
   }
 
   .hero-grid {
@@ -1003,7 +916,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 @media (max-width: 991px) {
   .hero-section {
     position: relative;
-    padding-top: 14px !important;
+    padding-top: 20px !important;
     padding-bottom: 32px !important;
   }
 
@@ -1019,26 +932,6 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 
   .hero-content {
     display: contents !important;
-  }
-
-  /* Egyptian icons drifting across the top of the mobile hero */
-  .hero-egypt-track {
-    height: 64px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .hero-egypt-runner {
-    width: 48px !important;
-    height: 48px !important;
-    margin-top: -24px !important;
-    animation-duration: 30s !important;
-    animation-delay: calc(var(--i) * -2.5s) !important;
-  }
-
-  .hero-egypt-img {
-    width: 48px !important;
-    height: 48px !important;
-    padding: 4px;
   }
 
   .hero-title-row {
