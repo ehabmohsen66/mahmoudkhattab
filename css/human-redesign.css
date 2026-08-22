@@ -2828,10 +2828,10 @@ textarea:focus-visible {
         top: 0;
         right: auto;
         width: auto;
-        max-width: 260px;
-        max-height: 70px;
+        max-width: 270px;
+        max-height: 80px;
         object-fit: contain;
-        margin: 0 auto -6px auto;
+        margin: 0 auto -8px auto;
         opacity: 1;
     }
 
@@ -3075,10 +3075,10 @@ textarea:focus-visible {
         top: 0;
         right: auto;
         width: auto;
-        max-width: 190px;
-        max-height: 52px;
+        max-width: 235px;
+        max-height: 70px;
         object-fit: contain;
-        margin: 0 auto -5px auto;
+        margin: 0 auto -6px auto;
         opacity: 1;
     }
 
