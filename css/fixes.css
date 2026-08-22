@@ -912,7 +912,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 12px !important;
+    gap: 0 !important;
     background: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
@@ -928,13 +928,11 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    max-height: 160px !important;
-    object-fit: contain !important;
+    margin: 0 auto -8px auto !important;
     opacity: 1 !important;
     pointer-events: none !important;
     z-index: 1 !important;
     mix-blend-mode: normal !important;
-    margin: 0 auto !important;
   }
 
   .hero-guide-frame {
@@ -1031,7 +1029,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 0 !important;
     background: transparent !important;
     border: 0 !important;
     box-shadow: none !important;
@@ -1047,13 +1045,11 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    max-height: 130px !important;
-    object-fit: contain !important;
+    margin: 0 auto -6px auto !important;
     opacity: 1 !important;
     pointer-events: none !important;
     z-index: 1 !important;
     mix-blend-mode: normal !important;
-    margin: 0 auto !important;
   }
 
   .hero-guide-frame {
