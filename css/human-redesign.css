@@ -526,16 +526,17 @@ h6,
 }
 
 .hero-egypt-animation {
-    position: absolute;
-    top: -145px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 0;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    z-index: 1;
     display: block;
-    width: 128%;
-    max-width: 660px;
+    width: 100%;
+    max-width: 100%;
     height: auto;
-    opacity: 0.96;
+    object-fit: contain;
+    opacity: 1;
     pointer-events: none;
     mix-blend-mode: normal;
 }

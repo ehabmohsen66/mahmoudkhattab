@@ -788,7 +788,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 /* --- Desktop Layout (>= 992px) --- */
 @media (min-width: 992px) {
   .hero-section {
-    padding-top: 48px !important;
+    padding-top: 28px !important;
     padding-bottom: 56px !important;
     overflow: visible !important;
   }
@@ -878,23 +878,29 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     z-index: 2 !important;
     width: 100% !important;
     max-width: 520px !important;
-    margin: 48px auto 0 !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 10px !important;
   }
 
   .hero-egypt-animation {
     display: block !important;
-    position: absolute !important;
-    top: -145px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 128% !important;
-    max-width: 660px !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    opacity: 0.96 !important;
+    max-height: 180px !important;
+    object-fit: contain !important;
+    opacity: 1 !important;
     pointer-events: none !important;
-    z-index: 0 !important;
+    z-index: 1 !important;
     mix-blend-mode: normal !important;
-    filter: saturate(1.1) !important;
+    margin: 0 auto !important;
   }
 
   .hero-guide-frame {
@@ -983,23 +989,29 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     z-index: 2 !important;
     width: 100% !important;
     max-width: 440px !important;
-    margin: 44px auto 18px !important;
+    margin: 10px auto 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 8px !important;
   }
 
   .hero-egypt-animation {
     display: block !important;
-    position: absolute !important;
-    top: -105px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 124% !important;
-    max-width: 520px !important;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
-    opacity: 0.95 !important;
+    max-height: 140px !important;
+    object-fit: contain !important;
+    opacity: 1 !important;
     pointer-events: none !important;
-    z-index: 0 !important;
+    z-index: 1 !important;
     mix-blend-mode: normal !important;
-    filter: saturate(1.1) !important;
+    margin: 0 auto !important;
   }
 
   .hero-guide-frame {
