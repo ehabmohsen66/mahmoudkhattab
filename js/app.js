@@ -350,6 +350,21 @@ function applyTranslations(lang) {
     }
   });
 
+  // Update dynamic data-label attributes (e.g. for floating WhatsApp button ::after)
+  document.querySelectorAll('[data-i18n-label]').forEach(el => {
+    const key = el.getAttribute('data-i18n-label');
+    if (dict[key]) {
+      el.setAttribute('data-label', dict[key]);
+    }
+  });
+
+  // Update all WhatsApp chat links with localized prefilled message
+  const waMsg = dict.whatsappDefaultText || 'Hello Mahmoud!';
+  const waUrl = `https://wa.me/201009686874?text=${encodeURIComponent(waMsg)}`;
+  document.querySelectorAll('.channel-whatsapp, .hero-whatsapp, .fl-whatsapp, .quick-channel-primary, .card-whatsapp, .social-whatsapp').forEach(el => {
+    el.href = waUrl;
+  });
+
   // Update HTML lang attribute
   document.documentElement.lang = lang;
 

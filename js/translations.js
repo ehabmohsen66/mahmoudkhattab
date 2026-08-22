@@ -40,6 +40,9 @@ const TRANSLATIONS = {
     heroStatLangSub: 'Свободный русский',
     heroStatTours: '2500+ Туров',
     heroStatToursSub: 'Счастливые туристы',
+    heroLiveStatus: 'Каир • Луксор • 24/7 На связи',
+    messengerHubWhatsAppSub: '+20 100 968 6874 • 24/7 Онлайн',
+    whatsappDefaultText: 'Здравствуйте, Махмуд! Хочу узнать подробнее об экскурсиях в Египте.',
     
     btnHeroWhatsApp: 'Написать в WhatsApp',
     btnHeroTelegram: 'Написать в Telegram',
@@ -262,6 +265,9 @@ const TRANSLATIONS = {
     heroStatLangSub: 'Russian / Eng / Chinese',
     heroStatTours: '2,500+ Tours',
     heroStatToursSub: 'Delighted Travelers',
+    heroLiveStatus: 'Cairo • Luxor • 24/7 Online',
+    messengerHubWhatsAppSub: '+20 100 968 6874 • 24/7 Online',
+    whatsappDefaultText: 'Hello Mahmoud! I would like to know more about private tours in Egypt.',
     
     btnHeroWhatsApp: 'Chat on WhatsApp',
     btnHeroTelegram: 'Chat on Telegram',
@@ -487,6 +493,9 @@ const TRANSLATIONS = {
     heroStatLangSub: '俄语 / 英语 / 中文',
     heroStatTours: '2,500+次带团',
     heroStatToursSub: '服务全球无数游客',
+    heroLiveStatus: '开罗 • 卢克索 • 24小时在线',
+    messengerHubWhatsAppSub: '+20 100 968 6874 • 24小时在线',
+    whatsappDefaultText: '您好马哈茂德！我想了解一下埃及的私人定制游行程。',
     
     btnHeroWhatsApp: 'WhatsApp在线咨询',
     btnHeroTelegram: 'Telegram在线咨询',
