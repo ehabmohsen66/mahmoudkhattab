@@ -939,17 +939,24 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
+    max-width: 560px !important;
+    width: 100% !important;
   }
 
   .hero-channel-hub .hero-channel-label {
     text-align: center !important;
     width: 100% !important;
-    margin-bottom: 8px !important;
+    margin: 0 auto 8px auto !important;
   }
 
   .hero-channel-hub .hero-channel-icons {
+    display: flex !important;
     justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
     width: 100% !important;
+    margin: 0 auto !important;
   }
 
   .hero-guide-card {
