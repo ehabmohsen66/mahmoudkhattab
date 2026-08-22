@@ -64,7 +64,7 @@
   <link rel="stylesheet" href="css/responsive.css?v=20260822a">
   <link rel="stylesheet" href="css/redesign.css?v=20260822a">
   <link rel="stylesheet" href="css/human-redesign.css?v=20260822a">
-  <link rel="stylesheet" href="css/fixes.css?v=20260822d">
+  <link rel="stylesheet" href="css/fixes.css?v=20260822e">
   <script src="https://cdn.jsdelivr.net/npm/@dotlottie/player-component@v1.3.0/dist/dotlottie-player.js" defer></script>
 
   <!-- Schema.org JSON-LD -->
@@ -205,50 +205,6 @@
     <div class="hero-overlay"></div>
     <div class="container">
       <div class="hero-grid">
-        
-        <!-- Guide Portrait Column -->
-        <div class="hero-guide-card">
-          <video class="hero-egypt-animation" src="assets/videos/egypt-header-transparent.webm" data-src="assets/videos/egypt-header-transparent.webm" autoplay muted loop playsinline aria-hidden="true"></video>
-          <div class="hero-guide-frame" id="hero-gallery" role="region" aria-label="Tour photo gallery" tabindex="0">
-            <div class="hero-gallery-track">
-              <img src="assets/photos/photo_26.jpg" alt="Mahmoud with guests beside the Sphinx and pyramids in Giza" class="hero-guide-img hero-gallery-slide is-active" data-caption-ru="Махмуд с гостями в Гизе" data-caption-en="Mahmoud with guests in Giza" data-caption-zh="马哈茂德与客人在吉萨" aria-hidden="false">
-              <img src="assets/photos/photo_01.jpg" alt="Mahmoud with guests beside the Great Pyramid" class="hero-guide-img hero-gallery-slide" data-caption-ru="Вместе у Великой пирамиды" data-caption-en="Together beside the Great Pyramid" data-caption-zh="相聚在大金字塔旁" aria-hidden="true">
-              <img src="assets/photos/photo_07.jpg" alt="A relaxed tour group at the Giza pyramids" class="hero-guide-img hero-gallery-slide" data-caption-ru="Спокойный день у пирамид" data-caption-en="A relaxed day at the pyramids" data-caption-zh="轻松游览金字塔的一天" aria-hidden="true">
-              <img src="assets/photos/photo_20.jpg" alt="Mahmoud at the Temple of Hatshepsut in Luxor" class="hero-guide-img hero-gallery-slide" data-caption-ru="Истории Луксора с Махмудом" data-caption-en="Discovering Luxor with Mahmoud" data-caption-zh="与马哈茂德探索卢克索" aria-hidden="true">
-              <img src="assets/photos/photo_06.jpg" alt="A joyful moment during a desert journey in Egypt" class="hero-guide-img hero-gallery-slide" data-caption-ru="Живые моменты в египетской пустыне" data-caption-en="Real moments in the Egyptian desert" data-caption-zh="埃及沙漠中的真实时刻" aria-hidden="true">
-            </div>
-            <button type="button" class="hero-gallery-arrow hero-gallery-prev" aria-label="Previous photo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
-            </button>
-            <button type="button" class="hero-gallery-arrow hero-gallery-next" aria-label="Next photo">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
-            </button>
-            <div class="hero-gallery-dots" role="tablist" aria-label="Choose gallery photo">
-              <button type="button" class="hero-gallery-dot is-active" aria-label="Photo 1" aria-selected="true"></button>
-              <button type="button" class="hero-gallery-dot" aria-label="Photo 2" aria-selected="false"></button>
-              <button type="button" class="hero-gallery-dot" aria-label="Photo 3" aria-selected="false"></button>
-              <button type="button" class="hero-gallery-dot" aria-label="Photo 4" aria-selected="false"></button>
-              <button type="button" class="hero-gallery-dot" aria-label="Photo 5" aria-selected="false"></button>
-            </div>
-            <div class="hero-guide-live-status">
-              <span class="live-pulse-dot"></span>
-              <span>Каир • Луксор • 24/7 На связи</span>
-            </div>
-            <div class="hero-guide-badge-floating">
-              <div class="hero-badge-item">
-                <div class="hero-badge-title" data-i18n="heroBadgeExp">20 ЛЕТ</div>
-                <div class="hero-badge-sub" data-i18n="heroStatExpSub">Опыта в туризме</div>
-              </div>
-              <div class="hero-badge-divider"></div>
-              <div class="hero-badge-item">
-                <div class="hero-badge-title">5.0 ★★★★★</div>
-                <div class="hero-badge-sub" data-i18n="heroStatRatingSub">NeedGuide & Тонкости</div>
-              </div>
-            </div>
-          </div>
-          <p class="hero-photo-caption" id="hero-photo-caption">Махмуд с гостями в Гизе</p>
-        </div>
-
         <!-- Hero Content Column -->
         <div class="hero-content">
           <div class="hero-pill-badge">
@@ -269,72 +225,36 @@
             Индивидуальные экскурсии премиум-класса по Каиру, Гизе, Луксору, Асуану, Александрии и Сахаре. Без очередей и без навязчивых магазинов.
           </p>
 
-          <!-- Language Proficiency Feature Cards -->
-          <div class="hero-lang-feature">
-            <div class="hero-lang-card featured">
-              <div class="hero-lang-header">
-                <svg class="flag-icon" viewBox="0 0 640 480"><g fill-rule="evenodd" stroke-width="1pt"><path fill="#fff" d="M0 0h640v480H0z"/><path fill="#0039a6" d="M0 160h640v320H0z"/><path fill="#d52b1e" d="M0 320h640v160H0z"/></g></svg>
-                <span class="hero-lang-name">Русский</span>
+          <!-- Guide Photo Gallery Showcase (Replacing 5.0 stars area) -->
+          <div class="hero-guide-card">
+            <video class="hero-egypt-animation" src="assets/videos/egypt-header-transparent.webm" data-src="assets/videos/egypt-header-transparent.webm" autoplay muted loop playsinline aria-hidden="true"></video>
+            <div class="hero-guide-frame" id="hero-gallery" role="region" aria-label="Tour photo gallery" tabindex="0">
+              <div class="hero-gallery-track">
+                <img src="assets/photos/photo_26.jpg" alt="Mahmoud with guests beside the Sphinx and pyramids in Giza" class="hero-guide-img hero-gallery-slide is-active" data-caption-ru="Махмуд с гостями в Гизе" data-caption-en="Mahmoud with guests in Giza" data-caption-zh="马哈茂德与客人在吉萨" aria-hidden="false">
+                <img src="assets/photos/photo_01.jpg" alt="Mahmoud with guests beside the Great Pyramid" class="hero-guide-img hero-gallery-slide" data-caption-ru="Вместе у Великой пирамиды" data-caption-en="Together beside the Great Pyramid" data-caption-zh="相聚在大金字塔旁" aria-hidden="true">
+                <img src="assets/photos/photo_07.jpg" alt="A relaxed tour group at the Giza pyramids" class="hero-guide-img hero-gallery-slide" data-caption-ru="Спокойный день у пирамид" data-caption-en="A relaxed day at the pyramids" data-caption-zh="轻松游览金字塔的一天" aria-hidden="true">
+                <img src="assets/photos/photo_20.jpg" alt="Mahmoud at the Temple of Hatshepsut in Luxor" class="hero-guide-img hero-gallery-slide" data-caption-ru="Истории Луксора с Махмудом" data-caption-en="Discovering Luxor with Mahmoud" data-caption-zh="与马哈茂德探索卢克索" aria-hidden="true">
+                <img src="assets/photos/photo_06.jpg" alt="A joyful moment during a desert journey in Egypt" class="hero-guide-img hero-gallery-slide" data-caption-ru="Живые моменты в египетской пустыне" data-caption-en="Real moments in the Egyptian desert" data-caption-zh="埃及沙漠中的真实时刻" aria-hidden="true">
               </div>
-              <span class="hero-lang-sub">Основной фокус</span>
-            </div>
-            <div class="hero-lang-card">
-              <div class="hero-lang-header">
-                <svg class="flag-icon" viewBox="0 0 640 480"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="m75 0 245 180L565 0h75v60L420 240l220 180v60h-75L320 300 75 480H0v-60l220-180L0 60V0h75z"/><path fill="#C8102E" d="m424 288 216 162v30h-40L384 318zm-208 0L0 450v30h40l216-162zM0 0l216 162-40 30L0 30V0zm640 0L424 162l40 30L640 30V0z"/><path fill="#FFF" d="M240 0h160v480H240zM0 160h640v160H0z"/><path fill="#C8102E" d="M280 0h80v480h-80zM0 200h640v80H0z"/></svg>
-                <span class="hero-lang-name">English</span>
+              <button type="button" class="hero-gallery-arrow hero-gallery-prev" aria-label="Previous photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button type="button" class="hero-gallery-arrow hero-gallery-next" aria-label="Next photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+              <div class="hero-gallery-dots" role="tablist" aria-label="Choose gallery photo">
+                <button type="button" class="hero-gallery-dot is-active" aria-label="Photo 1" aria-selected="true"></button>
+                <button type="button" class="hero-gallery-dot" aria-label="Photo 2" aria-selected="false"></button>
+                <button type="button" class="hero-gallery-dot" aria-label="Photo 3" aria-selected="false"></button>
+                <button type="button" class="hero-gallery-dot" aria-label="Photo 4" aria-selected="false"></button>
+                <button type="button" class="hero-gallery-dot" aria-label="Photo 5" aria-selected="false"></button>
               </div>
-              <span class="hero-lang-sub">Fluent</span>
-            </div>
-            <div class="hero-lang-card">
-              <div class="hero-lang-header">
-                <svg class="flag-icon" viewBox="0 0 640 480"><path fill="#de2910" d="M0 0h640v480H0z"/><path fill="#ffde00" d="M120 160 85 52l92 67H63l92-67zm80-96-18 25-18-25 11 29-29-11 29 11-18 25 25-18 11 29 0-31zm48 48-7 30-26-17 21 23-31 2 30 7-7 30 23-21 2 31 7-30zm0 64 7 30-23-21-2 31-7-30-30 7 31 2-21 23 26-17zm-48 48 18 25 18-25-11 29 29-11-29 11 18 25-25-18-11 29 0-31z"/></svg>
-                <span class="hero-lang-name">中文</span>
+              <div class="hero-guide-live-status">
+                <span class="live-pulse-dot"></span>
+                <span>Каир • Луксор • 24/7 На связи</span>
               </div>
-              <span class="hero-lang-sub">普通话服务</span>
             </div>
-            <div class="hero-lang-card">
-              <div class="hero-lang-header">
-                <svg class="flag-icon" viewBox="0 0 640 480"><g fill-rule="evenodd"><path fill="#000" d="M0 320h640v160H0z"/><path fill="#fff" d="M0 160h640v160H0z"/><path fill="#c8102e" d="M0 0h640v160H0z"/><path fill="#c69214" d="M305 210h30v60h-30z"/></g></svg>
-                <span class="hero-lang-name">العربية</span>
-              </div>
-              <span class="hero-lang-sub">Родной язык</span>
-            </div>
-          </div>
-
-          <!-- Key Trust Numbers (Compact Hero Strip) -->
-          <div class="stats-strip stats-strip--hero">
-            <div class="stat">
-              <div class="stars" aria-hidden="true" style="display:flex;align-items:center;gap:3px;height:14px;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="#C98A2E" style="width:12px;height:12px;max-width:12px;max-height:12px;fill:#C98A2E;flex-shrink:0;display:inline-block;"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="#C98A2E" style="width:12px;height:12px;max-width:12px;max-height:12px;fill:#C98A2E;flex-shrink:0;display:inline-block;"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="#C98A2E" style="width:12px;height:12px;max-width:12px;max-height:12px;fill:#C98A2E;flex-shrink:0;display:inline-block;"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="#C98A2E" style="width:12px;height:12px;max-width:12px;max-height:12px;fill:#C98A2E;flex-shrink:0;display:inline-block;"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="#C98A2E" style="width:12px;height:12px;max-width:12px;max-height:12px;fill:#C98A2E;flex-shrink:0;display:inline-block;"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg>
-              </div>
-              <span class="value">5.0</span>
-              <span class="label" data-i18n="metricRatingLabel">Guide rating</span>
-            </div>
-
-            <div class="divider" aria-hidden="true"></div>
-
-            <div class="stat">
-              <span class="value spacer">100%</span>
-              <span class="label" data-i18n="metricPositiveLabel">Positive reviews</span>
-            </div>
-
-            <div class="divider" aria-hidden="true"></div>
-
-            <div class="stat">
-              <span class="value spacer" data-i18n="metricExperienceVal">20 years</span>
-              <span class="label" data-i18n="metricExperienceLabel">Experience since 2007</span>
-            </div>
-
-            <div class="divider" aria-hidden="true"></div>
-
-            <div class="stat">
-              <span class="value spacer">2,500+</span>
-              <span class="label" data-i18n="metricToursLabel">Tours delivered</span>
-            </div>
+            <p class="hero-photo-caption" id="hero-photo-caption">Махмуд с гостями в Гизе</p>
           </div>
 
           <!-- Hero Action Buttons -->

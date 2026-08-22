@@ -758,7 +758,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   justify-content: center;
 }
 
-/* ---------- 21. Hero Image Gallery: Artistic & Engaging Mobile First Screen ---------- */
+/* ---------- 21. Hero Image Gallery: Showcase in Hero Flow ---------- */
 .hero-guide-card,
 .hero-guide-card:hover,
 .hero-guide-frame,
@@ -767,168 +767,158 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   transition: none !important;
 }
 
+.hero-grid {
+  display: block !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+}
+
+.hero-content {
+  max-width: 840px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+.hero-pill-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 16px !important;
+  border-radius: 999px !important;
+  background: rgba(8, 126, 164, 0.08) !important;
+  border: 1px solid rgba(8, 126, 164, 0.2) !important;
+  font-size: 0.84rem !important;
+  font-weight: 700 !important;
+  color: var(--nile, #087ea4) !important;
+  margin-bottom: 12px !important;
+}
+
+.hero-title {
+  font-size: clamp(2.6rem, 5.5vw, 4.4rem) !important;
+  line-height: 1.05 !important;
+  margin-bottom: 6px !important;
+  text-align: center !important;
+  letter-spacing: -0.01em !important;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem) !important;
+  line-height: 1.3 !important;
+  margin-top: 4px !important;
+  margin-bottom: 12px !important;
+  text-align: center !important;
+  color: var(--nile, #087ea4) !important;
+  font-weight: 700 !important;
+}
+
+.hero-tagline {
+  font-size: 1.02rem !important;
+  line-height: 1.65 !important;
+  margin: 0 auto 20px !important;
+  max-width: 640px !important;
+  text-align: center !important;
+  color: #4e6068 !important;
+}
+
+/* Gallery Showcase right in hero flow (replacing 5.0 stars stats area) */
+.hero-guide-card {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  max-width: 580px !important;
+  margin: 20px auto 24px !important;
+}
+
+.hero-egypt-animation {
+  display: block !important;
+  position: absolute !important;
+  top: -85px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 118% !important;
+  max-width: 540px !important;
+  height: auto !important;
+  opacity: 0.92 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  mix-blend-mode: normal !important;
+  filter: saturate(1.1) !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+.hero-guide-frame {
+  aspect-ratio: 16 / 10 !important;
+  max-height: 360px !important;
+  border-radius: 22px !important;
+  box-shadow: 0 18px 44px rgba(7, 30, 40, 0.22), 0 0 0 1px rgba(212, 175, 55, 0.35) !important;
+  overflow: hidden !important;
+  margin: 0 auto !important;
+}
+
+.hero-guide-img {
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.hero-photo-caption {
+  font-size: 0.86rem !important;
+  margin-top: 8px !important;
+  text-align: center !important;
+  color: var(--muted, #4e6068) !important;
+}
+
+.hero-guide-badge-floating {
+  display: none !important;
+}
+
+.hero-cta-group {
+  justify-content: center !important;
+  gap: 12px !important;
+  margin-top: 18px !important;
+}
+
+.hero-lang-feature {
+  display: none !important;
+}
+
+.hero-channel-hub {
+  margin-top: 20px !important;
+}
+
 @media (max-width: 900px) {
   .hero-section {
-    position: relative;
-    overflow: hidden;
-    padding-top: 24px !important;
-    padding-bottom: 36px !important;
+    padding-top: 20px !important;
+    padding-bottom: 32px !important;
   }
-
-  .hero-grid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 18px !important;
-  }
-
-  /* Artistic Egypt animated backdrop floating in hero */
-  .hero-egypt-animation {
-    display: block !important;
-    position: absolute !important;
-    top: -75px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 118% !important;
-    max-width: 480px !important;
-    height: auto !important;
-    opacity: 0.92 !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
-    mix-blend-mode: normal !important;
-    filter: saturate(1.1) !important;
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
-  }
-
-  /* Photo gallery card positioned right on the first screen */
   .hero-guide-card {
-    order: 2 !important;
-    position: relative !important;
-    z-index: 2 !important;
-    width: 100% !important;
-    max-width: 430px !important;
-    margin: 0 auto !important;
+    max-width: 440px !important;
+    margin: 14px auto 18px !important;
   }
-
   .hero-guide-frame {
     aspect-ratio: 4 / 3 !important;
-    max-height: 270px !important;
+    max-height: 275px !important;
     border-radius: 20px !important;
-    box-shadow: 0 16px 36px rgba(7, 30, 40, 0.22), 0 0 0 1px rgba(212, 175, 55, 0.35) !important;
-    overflow: hidden !important;
   }
-
-  .hero-guide-img {
-    height: 100% !important;
-    object-fit: cover !important;
+  .hero-egypt-animation {
+    top: -70px !important;
+    width: 120% !important;
+    max-width: 460px !important;
   }
-
-  .hero-photo-caption {
-    font-size: 0.82rem !important;
-    margin-top: 6px !important;
-    text-align: center !important;
-    color: var(--muted, #4e6068) !important;
-  }
-
-  .hero-guide-badge-floating {
-    display: none !important;
-  }
-
-  /* Hero content typography on mobile */
-  .hero-content {
-    order: 1 !important;
-    position: relative !important;
-    z-index: 2 !important;
-    text-align: center !important;
-  }
-
-  .hero-pill-badge {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 5px 12px !important;
-    border-radius: 999px !important;
-    background: rgba(8, 126, 164, 0.08) !important;
-    border: 1px solid rgba(8, 126, 164, 0.2) !important;
-    font-size: 0.78rem !important;
-    font-weight: 700 !important;
-    color: var(--nile, #087ea4) !important;
-    margin-bottom: 6px !important;
-  }
-
   .hero-title {
     font-size: clamp(2.2rem, 8.5vw, 3rem) !important;
-    line-height: 1.05 !important;
-    margin-bottom: 4px !important;
-    text-align: center !important;
-    letter-spacing: -0.01em !important;
   }
-
   .hero-subtitle {
     font-size: clamp(1rem, 3.8vw, 1.2rem) !important;
-    line-height: 1.3 !important;
-    margin-top: 2px !important;
-    margin-bottom: 8px !important;
-    text-align: center !important;
-    color: var(--nile, #087ea4) !important;
-    font-weight: 700 !important;
   }
-
   .hero-tagline {
     font-size: 0.9rem !important;
     line-height: 1.5 !important;
-    margin: 0 auto 10px !important;
-    max-width: 420px !important;
-    text-align: center !important;
-    color: #4e6068 !important;
+    margin-bottom: 12px !important;
   }
-
   .hero-cta-group {
-    justify-content: center !important;
     gap: 8px !important;
     margin-top: 14px !important;
-  }
-
-  .hero-lang-feature {
-    display: none !important;
-  }
-
-  .stats-strip--hero {
-    margin-top: 12px !important;
-    padding: 10px 12px !important;
-    max-width: 440px !important;
-    margin-inline: auto !important;
-  }
-}
-
-@media (min-width: 992px) {
-  .hero-grid {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 40px;
-  }
-  .hero-content {
-    max-width: 100%;
-  }
-  .hero-guide-card {
-    width: 100%;
-    max-width: 560px;
-    margin: 0 auto;
-    justify-self: center;
-    transform: none !important;
-  }
-  .hero-guide-frame {
-    margin: 0 auto;
-  }
-}
-
-@media (min-width: 1200px) {
-  .hero-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-  }
-  .hero-guide-card {
-    max-width: 600px;
   }
 }
 
