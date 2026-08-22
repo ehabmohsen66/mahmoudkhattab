@@ -257,11 +257,16 @@ h6,
 
 /* Header and personal identity */
 .main-header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     min-height: 76px;
     border-bottom: 1px solid rgba(8, 126, 164, 0.12);
     background: rgba(255, 255, 255, 0.94);
     box-shadow: none;
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .main-header.scrolled {
