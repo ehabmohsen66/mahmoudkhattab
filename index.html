@@ -64,7 +64,7 @@
   <link rel="stylesheet" href="css/responsive.css?v=20260822a">
   <link rel="stylesheet" href="css/redesign.css?v=20260822a">
   <link rel="stylesheet" href="css/human-redesign.css?v=20260822a">
-  <link rel="stylesheet" href="css/fixes.css?v=20260822g">
+  <link rel="stylesheet" href="css/fixes.css?v=20260822h">
   <script src="https://cdn.jsdelivr.net/npm/@dotlottie/player-component@v1.3.0/dist/dotlottie-player.js" defer></script>
 
   <!-- Schema.org JSON-LD -->
@@ -208,9 +208,73 @@
 
         <!-- Hero Content Column -->
         <div class="hero-content">
-          <div class="hero-pill-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <span data-i18n="heroBadge">Лицензированный частный гид по всему Египту</span>
+          <!-- Running Egyptian Camel Animation (Starts at window left and runs to right) -->
+          <div class="hero-camel-track" aria-hidden="true">
+            <div class="hero-camel-runner">
+              <svg class="camel-svg" viewBox="0 0 160 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Dust particles -->
+                <g class="camel-dust-trail">
+                  <circle class="dust-p1" cx="24" cy="98" r="3.2" fill="#c69214"/>
+                  <circle class="dust-p2" cx="14" cy="101" r="4.2" fill="#d4af37"/>
+                  <circle class="dust-p3" cx="6" cy="103" r="2.8" fill="#e8e3da"/>
+                </g>
+
+                <!-- Back Legs (far side) -->
+                <g class="camel-leg camel-leg-back-far">
+                  <path d="M 68 62 Q 74 78 72 90 Q 70 98 76 104 L 70 105 Q 64 96 66 86 Q 64 74 62 64 Z" fill="#9e7522"/>
+                </g>
+                <g class="camel-leg camel-leg-front-far">
+                  <path d="M 108 58 Q 112 74 114 88 Q 116 98 122 104 L 117 105 Q 109 96 107 84 Q 104 70 102 58 Z" fill="#9e7522"/>
+                </g>
+
+                <!-- Main Body, Hump, Neck & Head -->
+                <g class="camel-body-group">
+                  <!-- Tail with tuft -->
+                  <g class="camel-tail">
+                    <path d="M 52 54 Q 44 64 42 78" stroke="#b88928" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M 42 76 Q 38 84 43 88 Q 46 84 43 78 Z" fill="#7a5511"/>
+                  </g>
+
+                  <!-- Torso & Hump -->
+                  <path d="M 52 54 C 50 46 54 40 62 38 C 70 20 90 20 96 38 C 104 40 110 46 112 56 C 114 66 106 72 98 72 C 86 74 72 74 60 70 C 52 66 50 60 52 54 Z" fill="#c69214"/>
+
+                  <!-- Egyptian Saddle Blanket / Ornamental Cloth -->
+                  <path d="M 72 38 C 78 30 90 30 94 42 L 96 58 C 96 60 94 62 92 62 L 72 62 C 70 62 68 60 68 58 L 70 42 Z" fill="#087ea4"/>
+                  <!-- Saddle Gold Trim & Fringe -->
+                  <path d="M 69 58 L 95 58" stroke="#fcd34d" stroke-width="2.5"/>
+                  <line x1="72" y1="58" x2="72" y2="64" stroke="#fcd34d" stroke-width="1.5"/>
+                  <line x1="76" y1="58" x2="76" y2="65" stroke="#fcd34d" stroke-width="1.5"/>
+                  <line x1="80" y1="58" x2="80" y2="64" stroke="#fcd34d" stroke-width="1.5"/>
+                  <line x1="84" y1="58" x2="84" y2="65" stroke="#fcd34d" stroke-width="1.5"/>
+                  <line x1="88" y1="58" x2="88" y2="64" stroke="#fcd34d" stroke-width="1.5"/>
+                  <line x1="92" y1="58" x2="92" y2="65" stroke="#fcd34d" stroke-width="1.5"/>
+
+                  <!-- Neck & Head -->
+                  <g class="camel-head-neck">
+                    <!-- Graceful arched neck -->
+                    <path d="M 108 58 C 114 50 120 40 126 28 C 128 24 132 20 138 22 C 146 22 152 25 156 28 C 158 30 156 34 150 36 C 142 38 138 34 135 34 C 130 46 124 58 116 68 Z" fill="#c69214"/>
+                    <!-- Ear -->
+                    <path d="M 135 21 C 136 17 139 16 141 19 C 140 22 138 23 135 21 Z" fill="#9e7522"/>
+                    <!-- Eye -->
+                    <circle cx="145" cy="27" r="1.6" fill="#1e1e1e"/>
+                    <circle cx="145.5" cy="26.5" r="0.6" fill="#ffffff"/>
+                    <!-- Nostril / Mouth contour -->
+                    <path d="M 152 33 Q 155 32 156 30" stroke="#7a5511" stroke-width="1.2" stroke-linecap="round"/>
+                    <!-- Traditional desert reins / halter (gold thread) -->
+                    <path d="M 141 24 Q 146 30 152 31" stroke="#fcd34d" stroke-width="1" fill="none"/>
+                    <path d="M 143 27 Q 138 38 128 48" stroke="#fcd34d" stroke-width="0.9" stroke-dasharray="2,2" fill="none"/>
+                  </g>
+                </g>
+
+                <!-- Front Legs (near side) -->
+                <g class="camel-leg camel-leg-back-near">
+                  <path d="M 58 64 Q 54 78 58 90 Q 62 100 56 105 L 62 106 Q 70 98 66 86 Q 66 74 68 64 Z" fill="#c69214"/>
+                </g>
+                <g class="camel-leg camel-leg-front-near">
+                  <path d="M 114 60 Q 120 74 116 88 Q 112 98 118 105 L 124 105 Q 122 96 122 84 Q 120 70 118 60 Z" fill="#c69214"/>
+                </g>
+              </svg>
+            </div>
           </div>
 
           <div class="hero-title-row">

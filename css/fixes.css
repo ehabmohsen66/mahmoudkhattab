@@ -767,6 +767,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   transition: none !important;
 }
 
+.hero-pill-badge,
 .hero-lang-feature {
   display: none !important;
 }
@@ -784,11 +785,148 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   color: var(--muted, #4e6068) !important;
 }
 
+/* --- Running Egyptian Camel Animation (Traversing Window Left to Right) --- */
+.hero-camel-track {
+  position: relative !important;
+  width: 100vw !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  height: 52px !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  z-index: 5 !important;
+  margin-bottom: 8px !important;
+}
+
+.hero-camel-runner {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 78px !important;
+  height: 52px !important;
+  will-change: transform;
+  animation: camelRunAcross 12s linear infinite !important;
+}
+
+.camel-svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  overflow: visible !important;
+  filter: drop-shadow(0 3px 6px rgba(184, 137, 40, 0.25)) !important;
+}
+
+/* Camel Limb & Body Animations */
+.camel-body-group {
+  transform-origin: 85px 65px;
+  animation: camelBodyBob 0.6s ease-in-out infinite alternate;
+}
+
+.camel-head-neck {
+  transform-origin: 116px 65px;
+  animation: camelHeadBob 0.6s ease-in-out infinite alternate;
+}
+
+.camel-tail {
+  transform-origin: 52px 54px;
+  animation: camelTailSway 0.6s ease-in-out infinite alternate;
+}
+
+.camel-leg-front-near {
+  transform-origin: 114px 60px;
+  animation: camelFrontNear 0.6s ease-in-out infinite alternate;
+}
+
+.camel-leg-front-far {
+  transform-origin: 108px 58px;
+  animation: camelFrontFar 0.6s ease-in-out infinite alternate;
+}
+
+.camel-leg-back-near {
+  transform-origin: 58px 64px;
+  animation: camelBackNear 0.6s ease-in-out infinite alternate;
+}
+
+.camel-leg-back-far {
+  transform-origin: 68px 62px;
+  animation: camelBackFar 0.6s ease-in-out infinite alternate;
+}
+
+.camel-dust-trail circle {
+  animation: camelDustPuff 0.6s ease-out infinite;
+}
+.camel-dust-trail .dust-p2 { animation-delay: 0.15s; }
+.camel-dust-trail .dust-p3 { animation-delay: 0.3s; }
+
+@keyframes camelRunAcross {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 100px));
+  }
+}
+
+@keyframes camelBodyBob {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-2.5px) rotate(-1deg); }
+  100% { transform: translateY(1px) rotate(1deg); }
+}
+
+@keyframes camelHeadBob {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-4deg); }
+}
+
+@keyframes camelTailSway {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-12deg); }
+}
+
+@keyframes camelFrontNear {
+  0% { transform: rotate(-22deg); }
+  100% { transform: rotate(26deg); }
+}
+
+@keyframes camelFrontFar {
+  0% { transform: rotate(26deg); }
+  100% { transform: rotate(-22deg); }
+}
+
+@keyframes camelBackNear {
+  0% { transform: rotate(26deg); }
+  100% { transform: rotate(-20deg); }
+}
+
+@keyframes camelBackFar {
+  0% { transform: rotate(-20deg); }
+  100% { transform: rotate(26deg); }
+}
+
+@keyframes camelDustPuff {
+  0% { opacity: 0.7; transform: scale(0.8) translate(0, 0); }
+  50% { opacity: 0.35; transform: scale(1.2) translate(-6px, -3px); }
+  100% { opacity: 0; transform: scale(1.6) translate(-12px, -6px); }
+}
+
 /* --- Desktop Layout (>= 992px) --- */
 @media (min-width: 992px) {
   .hero-section {
-    padding-top: 40px !important;
+    padding-top: 30px !important;
     padding-bottom: 60px !important;
+  }
+
+  .hero-camel-track {
+    height: 60px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .hero-camel-runner {
+    width: 90px !important;
+    height: 60px !important;
+    animation-duration: 13s !important;
   }
 
   .hero-grid {
@@ -804,20 +942,6 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     max-width: 100% !important;
     text-align: left !important;
     margin: 0 !important;
-  }
-
-  .hero-pill-badge {
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 6px 16px !important;
-    border-radius: 999px !important;
-    background: rgba(8, 126, 164, 0.08) !important;
-    border: 1px solid rgba(8, 126, 164, 0.2) !important;
-    font-size: 0.84rem !important;
-    font-weight: 700 !important;
-    color: var(--nile, #087ea4) !important;
-    margin-bottom: 14px !important;
   }
 
   .hero-title {
@@ -915,7 +1039,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 @media (max-width: 991px) {
   .hero-section {
     position: relative;
-    padding-top: 20px !important;
+    padding-top: 14px !important;
     padding-bottom: 32px !important;
   }
 
@@ -933,19 +1057,17 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     display: contents !important;
   }
 
-  .hero-pill-badge {
+  /* Running camel at the top of mobile hero */
+  .hero-camel-track {
     order: 1 !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 5px 14px !important;
-    border-radius: 999px !important;
-    background: rgba(8, 126, 164, 0.08) !important;
-    border: 1px solid rgba(8, 126, 164, 0.2) !important;
-    font-size: 0.78rem !important;
-    font-weight: 700 !important;
-    color: var(--nile, #087ea4) !important;
-    margin-bottom: 8px !important;
+    height: 48px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .hero-camel-runner {
+    width: 72px !important;
+    height: 48px !important;
+    animation-duration: 11s !important;
   }
 
   .hero-title-row {
