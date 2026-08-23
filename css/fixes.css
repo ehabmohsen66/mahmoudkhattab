@@ -1626,6 +1626,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
   gap: 16px !important;
+  align-items: stretch !important;
 }
 
 .story-video-card {
@@ -1636,6 +1637,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   box-shadow: 0 10px 30px rgba(7, 30, 40, 0.06) !important;
   display: flex !important;
   flex-direction: column !important;
+  height: 100% !important;
   transition: transform 0.25s ease, box-shadow 0.25s ease !important;
 }
 
@@ -1648,16 +1650,20 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   display: flex !important;
   flex-direction: column !important;
   width: 100% !important;
+  height: 100% !important;
 }
 
 .story-reel-video {
   width: 100% !important;
-  aspect-ratio: 9/15 !important;
-  max-height: 380px !important;
+  height: 360px !important;
+  min-height: 360px !important;
+  max-height: 360px !important;
+  aspect-ratio: 9/16 !important;
   object-fit: cover !important;
   background: #000000 !important;
   display: block !important;
   border-radius: 20px 20px 0 0 !important;
+  flex-shrink: 0 !important;
 }
 
 .story-video-meta {
@@ -1666,6 +1672,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
+  flex: 1 1 auto !important;
+  justify-content: flex-start !important;
 }
 
 .story-video-badge-row {
@@ -1699,6 +1707,9 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   color: #071e28 !important;
   margin: 0 !important;
   line-height: 1.3 !important;
+  min-height: 2.6em !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 .story-video-desc {
@@ -1706,6 +1717,9 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   color: #4e6068 !important;
   margin: 0 !important;
   line-height: 1.4 !important;
+  min-height: 2.8em !important;
+  display: flex !important;
+  align-items: flex-start !important;
 }
 
 @media (max-width: 992px) {
@@ -1753,7 +1767,9 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     gap: 14px !important;
   }
   .story-reel-video {
-    max-height: 420px !important;
+    height: 400px !important;
+    max-height: 400px !important;
+    min-height: 400px !important;
     aspect-ratio: 9/16 !important;
   }
 }
