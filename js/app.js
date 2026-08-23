@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   initMobileNav();
   initLightbox();
+  initInfluencerStory();
   initHeaderScroll();
   initScrollEffects();
   initContactChooser();
@@ -367,6 +368,13 @@ function applyTranslations(lang) {
 
   // Update HTML lang attribute
   document.documentElement.lang = lang;
+
+  // Sync in-card story language buttons
+  document.querySelectorAll('.story-lang-btn').forEach(btn => {
+    const isActive = btn.dataset.storyLang === lang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
 
   // Update page title & meta description if defined
   if (dict.pageTitle) {
@@ -1494,5 +1502,85 @@ function initBackToTop() {
       behavior: 'smooth'
     });
   });
+}
+
+/* ==========================================================================
+   11. Influencer Spotlight & Guest Story Engine (@russborn)
+   ========================================================================== */
+function initInfluencerStory() {
+  const storyCard = document.querySelector('.influencer-story-card');
+  if (!storyCard) return;
+
+  const langButtons = storyCard.querySelectorAll('.story-lang-btn');
+  const quoteP1 = storyCard.querySelector('.influencer-quote-p1');
+  const quoteP2 = storyCard.querySelector('.influencer-quote-p2');
+
+  const setStoryLanguage = (targetLang) => {
+    langButtons.forEach(btn => {
+      const isActive = btn.dataset.storyLang === targetLang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+
+    const dict = TRANSLATIONS[targetLang] || TRANSLATIONS.ru;
+    if (quoteP1 && dict.storyQuoteP1) {
+      quoteP1.innerHTML = dict.storyQuoteP1;
+    }
+    if (quoteP2 && dict.storyQuoteP2) {
+      quoteP2.innerHTML = dict.storyQuoteP2;
+    }
+  };
+
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const targetLang = e.currentTarget.dataset.storyLang;
+      if (targetLang) {
+        setStoryLanguage(targetLang);
+      }
+    });
+  });
+
+  // Story Photo Lightbox trigger
+  const photoCard = document.getElementById('story-photo-card');
+  if (photoCard) {
+    photoCard.addEventListener('click', () => {
+      openStoryPhotoLightbox();
+    });
+  }
+
+  // Videos audio & mutual pause handling
+  const storyVideos = document.querySelectorAll('.story-reel-video');
+  storyVideos.forEach(vid => {
+    vid.addEventListener('play', () => {
+      storyVideos.forEach(otherVid => {
+        if (otherVid !== vid && !otherVid.paused) {
+          otherVid.pause();
+        }
+      });
+    });
+  });
+}
+
+function openStoryPhotoLightbox() {
+  const modal = document.getElementById('lightbox-modal');
+  const container = document.getElementById('lightbox-media');
+  const caption = document.getElementById('lightbox-caption');
+
+  if (!modal || !container) return;
+
+  const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+  const title = dict.storyPhotoCaption || 'Махмуд Хаттаб и @russborn в песках Белой Пустыни';
+  const loc = dict.storyPhotoLocation || 'Белая Пустыня, Египет';
+
+  container.innerHTML = `
+    <img src="russborn.png" alt="${title}" class="lightbox-img" style="max-height:82vh; border-radius:12px; object-fit:contain;">
+  `;
+
+  if (caption) {
+    caption.innerHTML = `<strong>${title}</strong> — ${loc}`;
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
