@@ -1039,7 +1039,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 
   .hero-egypt-animation {
-    display: block !important;
+    display: none !important;
     position: relative !important;
     top: 0 !important;
     left: 0 !important;
