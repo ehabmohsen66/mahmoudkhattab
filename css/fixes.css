@@ -1150,6 +1150,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 
   .hero-egypt-animation {
+    display: none !important;
     max-width: 235px !important;
     max-height: 70px !important;
     margin: 0 auto -6px auto !important;

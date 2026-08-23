@@ -2825,6 +2825,7 @@ textarea:focus-visible {
     }
 
     .hero-egypt-animation {
+        display: none !important;
         top: 0;
         right: auto;
         width: auto;
@@ -3072,6 +3073,7 @@ textarea:focus-visible {
     }
 
     .hero-egypt-animation {
+        display: none !important;
         top: 0;
         right: auto;
         width: auto;
