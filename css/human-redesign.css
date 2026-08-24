@@ -2274,7 +2274,7 @@ h6,
 .about-photo-frame img,
 .about-img {
     filter: none;
-    transform: scaleX(-1);
+    transform: none;
 }
 
 .about-feature {

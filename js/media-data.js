@@ -496,8 +496,8 @@ const MEDIA_GALLERY = [
   {
     type: 'photo',
     id: 'pic-43',
-    src: 'assets/photos/mahmoud_portrait.jpg',
-    thumb: 'assets/photos/mahmoud_portrait.jpg',
+    src: 'assets/photos/Main-Mahmoud.jpeg',
+    thumb: 'assets/photos/Main-Mahmoud.jpeg',
     category: 'cairo',
     title: {
       ru: 'Ваш персональный гид — Махмуд Хаттаб',
