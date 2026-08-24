@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactChooser();
   initHeroGallery();
   initHeroVideo();
+  initFilmPlayer();
   initBackToTop();
 });
 
@@ -335,6 +336,27 @@ function initHeroVideo() {
 
   playVideo();
   window.addEventListener('touchstart', playVideo, { once: true, passive: true });
+}
+
+function initFilmPlayer() {
+  const filmPoster = document.getElementById('film-poster-btn');
+  const filmFrame = document.getElementById('film-frame');
+  if (!filmPoster || !filmFrame) return;
+
+  filmPoster.addEventListener('click', (e) => {
+    e.preventDefault();
+    filmFrame.innerHTML = `
+      <div style="position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:inherit;background:#000;">
+        <iframe 
+          src="https://www.youtube-nocookie.com/embed/geP_IIdUJhg?autoplay=1&rel=0&modestbranding=1" 
+          title="Egypt Great Pyramids" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen 
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:inherit;">
+        </iframe>
+      </div>`;
+  });
 }
 
 function applyTranslations(lang) {

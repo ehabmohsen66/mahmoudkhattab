@@ -58,7 +58,7 @@ const TRANSLATIONS = {
     filmEyebrow: 'ЕГИПЕТ В ДВИЖЕНИИ',
     filmTitle: 'МЕСТО, ГДЕ ИСТОРИЯ ВСЁ ЕЩЁ ЖИВА',
     filmDescription: 'Несколько минут, чтобы почувствовать масштаб, свет и ритм Египта.',
-    filmCredit: 'Фильм Beautiful Destinations',
+    filmCredit: 'Фильм Egypt Great Pyramids',
     filmWatch: 'Смотреть фильм на YouTube',
     
     // Quick Trust Highlights
@@ -306,7 +306,7 @@ const TRANSLATIONS = {
     filmEyebrow: 'EGYPT IN MOTION',
     filmTitle: 'WHERE HISTORY STILL FEELS ALIVE',
     filmDescription: 'A few minutes to feel the scale, light, and rhythm of Egypt.',
-    filmCredit: 'A film by Beautiful Destinations',
+    filmCredit: 'Egypt Great Pyramids Film',
     filmWatch: 'Watch the film on YouTube',
     
     // Quick Trust Highlights
@@ -557,7 +557,7 @@ const TRANSLATIONS = {
     filmEyebrow: '流动中的埃及',
     filmTitle: '历史依然鲜活的地方',
     filmDescription: '用几分钟感受埃及的尺度、光影与节奏。',
-    filmCredit: 'Beautiful Destinations 出品',
+    filmCredit: 'Egypt Great Pyramids 纪录短片',
     filmWatch: '在 YouTube 观看影片',
     
     // Quick Trust Highlights
