@@ -1743,6 +1743,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
   .influencer-story-card {
     padding: 26px 24px !important;
+    height: auto !important;
   }
 }
 
@@ -1766,11 +1767,18 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   .influencer-story-card {
     padding: 20px 16px !important;
     border-radius: 18px !important;
+    height: auto !important;
   }
   .influencer-story-cta {
     flex-direction: column !important;
     align-items: stretch !important;
-    padding: 14px 16px !important;
+    justify-content: flex-start !important;
+    padding: 16px 14px !important;
+    gap: 12px !important;
+  }
+  .story-cta-text {
+    flex: 0 0 auto !important;
+    width: 100% !important;
   }
   .story-cta-btn {
     width: 100% !important;
