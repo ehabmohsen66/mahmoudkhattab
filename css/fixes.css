@@ -1821,8 +1821,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 
 .guesthouse-grid {
   display: grid !important;
-  grid-template-columns: 1.06fr 0.94fr !important;
-  gap: 32px !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 28px !important;
   align-items: stretch !important;
 }
 
@@ -1832,17 +1832,18 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   -webkit-backdrop-filter: blur(16px) !important;
   border: 1px solid rgba(201, 138, 46, 0.24) !important;
   border-radius: 24px !important;
-  padding: 32px 34px !important;
+  padding: 30px !important;
   box-shadow: 0 16px 44px rgba(7, 30, 40, 0.06), 0 2px 8px rgba(201, 138, 46, 0.08) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  gap: 20px !important;
+  gap: 18px !important;
+  height: 100% !important;
 }
 
 .guesthouse-lead-desc {
-  font-size: 1.03rem !important;
-  line-height: 1.74 !important;
+  font-size: 1.02rem !important;
+  line-height: 1.72 !important;
   color: #1e2e35 !important;
   margin: 0 !important;
 }
@@ -1850,7 +1851,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 .guesthouse-features-grid {
   display: grid !important;
   grid-template-columns: 1fr 1fr !important;
-  gap: 14px !important;
+  gap: 12px !important;
+  flex: 1 1 auto !important;
 }
 
 .guesthouse-feature-item {
@@ -1860,7 +1862,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   background: linear-gradient(135deg, rgba(201, 138, 46, 0.07), rgba(201, 138, 46, 0.02)) !important;
   border: 1px solid rgba(201, 138, 46, 0.16) !important;
   border-radius: 14px !important;
-  padding: 13px 15px !important;
+  padding: 12px 14px !important;
+  height: 100% !important;
 }
 
 .guesthouse-feature-icon {
@@ -1881,7 +1884,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 .guesthouse-feature-text h4 {
-  font-size: 0.93rem !important;
+  font-size: 0.92rem !important;
   font-weight: 750 !important;
   color: #071e28 !important;
   margin: 0 0 3px 0 !important;
@@ -1898,10 +1901,11 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   background: linear-gradient(135deg, rgba(0, 53, 128, 0.05), rgba(201, 138, 46, 0.07)) !important;
   border: 1px solid rgba(0, 53, 128, 0.18) !important;
   border-radius: 18px !important;
-  padding: 18px 20px !important;
+  padding: 16px 18px !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 14px !important;
+  gap: 12px !important;
+  margin-top: auto !important;
 }
 
 .guesthouse-rating-strip {
@@ -1948,8 +1952,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 
 .guesthouse-cta-row {
   display: flex !important;
-  gap: 10px !important;
-  flex-wrap: wrap !important;
+  width: 100% !important;
 }
 
 .guesthouse-btn-wa {
@@ -1984,14 +1987,17 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 .guesthouse-media-card {
   display: flex !important;
   flex-direction: column !important;
+  justify-content: space-between !important;
   gap: 12px !important;
+  height: 100% !important;
 }
 
 .guesthouse-hero-frame {
   position: relative !important;
   border-radius: 20px !important;
   overflow: hidden !important;
-  aspect-ratio: 16 / 10.5 !important;
+  flex: 1 1 auto !important;
+  min-height: 380px !important;
   box-shadow: 0 16px 40px rgba(7, 30, 40, 0.12), 0 2px 8px rgba(201, 138, 46, 0.12) !important;
   border: 1px solid rgba(201, 138, 46, 0.24) !important;
   background: #071e28 !important;
@@ -2003,6 +2009,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   height: 100% !important;
   object-fit: cover !important;
   transition: transform 0.4s ease, opacity 0.25s ease !important;
+  display: block !important;
 }
 
 .guesthouse-hero-frame:hover .guesthouse-hero-img {
@@ -2097,6 +2104,15 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   .guesthouse-grid {
     grid-template-columns: 1fr !important;
     gap: 24px !important;
+  }
+  .guesthouse-info-card,
+  .guesthouse-media-card {
+    height: auto !important;
+  }
+  .guesthouse-hero-frame {
+    aspect-ratio: 16 / 10 !important;
+    min-height: unset !important;
+    height: auto !important;
   }
   .guesthouse-thumbs-track {
     display: flex !important;
