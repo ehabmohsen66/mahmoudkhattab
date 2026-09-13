@@ -1953,13 +1953,13 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 .guesthouse-btn-wa {
-  flex: 1 1 200px !important;
+  width: 100% !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 8px !important;
-  padding: 12px 18px !important;
-  font-size: 0.88rem !important;
+  padding: 13px 20px !important;
+  font-size: 0.94rem !important;
   font-weight: 750 !important;
   border-radius: 100px !important;
   background: #25d366 !important;
@@ -1976,37 +1976,8 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
 }
 
 .guesthouse-btn-wa svg {
-  width: 18px !important;
-  height: 18px !important;
-  flex-shrink: 0 !important;
-}
-
-.guesthouse-btn-booking {
-  flex: 1 1 200px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  padding: 12px 18px !important;
-  font-size: 0.88rem !important;
-  font-weight: 750 !important;
-  border-radius: 100px !important;
-  background: #003580 !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 14px rgba(0, 53, 128, 0.25) !important;
-  transition: all 0.25s ease !important;
-}
-
-.guesthouse-btn-booking:hover {
-  background: #00224f !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 6px 18px rgba(0, 53, 128, 0.35) !important;
-  color: #ffffff !important;
-}
-
-.guesthouse-btn-booking svg {
-  width: 18px !important;
-  height: 18px !important;
+  width: 19px !important;
+  height: 19px !important;
   flex-shrink: 0 !important;
 }
 
@@ -2161,8 +2132,7 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     flex-direction: column !important;
     align-items: stretch !important;
   }
-  .guesthouse-btn-wa,
-  .guesthouse-btn-booking {
+  .guesthouse-btn-wa {
     width: 100% !important;
   }
   .guesthouse-hero-frame {
