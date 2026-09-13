@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroGallery();
   initHeroVideo();
   initFilmPlayer();
+  initGuestHouseShowcase();
   initBackToTop();
 });
 
@@ -387,6 +388,12 @@ function applyTranslations(lang) {
   document.querySelectorAll('.channel-whatsapp, .hero-whatsapp, .fl-whatsapp, .quick-channel-primary, .card-whatsapp, .social-whatsapp').forEach(el => {
     el.href = waUrl;
   });
+
+  const ghBtn = document.querySelector('.guesthouse-btn-wa');
+  if (ghBtn) {
+    const ghMsg = dict.guestHouseWaMsg || 'Hello Mahmoud! I would like to book a stay at Makai Pyramids Guest House.';
+    ghBtn.href = `https://wa.me/201009686874?text=${encodeURIComponent(ghMsg)}`;
+  }
 
   // Update HTML lang attribute
   document.documentElement.lang = lang;
@@ -1600,6 +1607,80 @@ function openStoryPhotoLightbox() {
 
   if (caption) {
     caption.innerHTML = `<strong>${title}</strong> — ${loc}`;
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+/* ==========================================================================
+   12. Makai Pyramids Guest House Showcase & Gallery
+   ========================================================================== */
+function initGuestHouseShowcase() {
+  const heroFrame = document.getElementById('guesthouse-hero-frame');
+  const featuredImg = document.getElementById('guesthouse-featured-img');
+  const captionEl = document.getElementById('guesthouse-img-caption');
+  const thumbs = document.querySelectorAll('.guesthouse-thumb');
+  const zoomBtn = document.getElementById('guesthouse-zoom-btn');
+
+  if (!featuredImg || !thumbs.length) return;
+
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', (e) => {
+      e.stopPropagation();
+      thumbs.forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+
+      const newSrc = thumb.dataset.img;
+      const newCaption = thumb.dataset.caption;
+
+      if (newSrc && featuredImg.getAttribute('src') !== newSrc) {
+        featuredImg.style.opacity = '0.35';
+        setTimeout(() => {
+          featuredImg.setAttribute('src', newSrc);
+          featuredImg.style.opacity = '1';
+        }, 120);
+      }
+
+      if (captionEl && newCaption) {
+        captionEl.textContent = newCaption;
+      }
+    });
+  });
+
+  const triggerZoom = () => {
+    const currentSrc = featuredImg.getAttribute('src');
+    const currentCaption = captionEl ? captionEl.textContent : 'Makai Pyramids Guest House';
+    openGuestHouseLightbox(currentSrc, currentCaption);
+  };
+
+  if (heroFrame) {
+    heroFrame.addEventListener('click', () => {
+      triggerZoom();
+    });
+  }
+
+  if (zoomBtn) {
+    zoomBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerZoom();
+    });
+  }
+}
+
+function openGuestHouseLightbox(imgSrc, captionText) {
+  const modal = document.getElementById('lightbox-modal');
+  const container = document.getElementById('lightbox-media');
+  const caption = document.getElementById('lightbox-caption');
+
+  if (!modal || !container) return;
+
+  container.innerHTML = `
+    <img src="${imgSrc}" alt="${captionText}" class="lightbox-img" style="max-height:85vh; border-radius:12px; object-fit:contain;">
+  `;
+
+  if (caption) {
+    caption.innerHTML = `<strong>Makai Pyramids Guest House</strong> — ${captionText}`;
   }
 
   modal.classList.add('active');

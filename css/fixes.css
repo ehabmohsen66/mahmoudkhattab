@@ -1795,3 +1795,382 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
     aspect-ratio: 9/16 !important;
   }
 }
+
+/* ==========================================================================
+   Makai Pyramids Guest House Showcase Styles
+   ========================================================================== */
+.guesthouse-section {
+  padding: 84px 0 !important;
+  background: linear-gradient(180deg, #f7f3ee 0%, #fdfbf7 50%, #f7f3ee 100%) !important;
+  position: relative !important;
+  border-top: 1px solid rgba(201, 138, 46, 0.15) !important;
+  border-bottom: 1px solid rgba(201, 138, 46, 0.15) !important;
+}
+
+.guesthouse-header {
+  margin-bottom: 38px !important;
+}
+
+.guesthouse-header .section-subtitle {
+  font-size: 1.05rem !important;
+  color: #4e6068 !important;
+  max-width: 680px !important;
+  margin: 8px auto 0 !important;
+  line-height: 1.6 !important;
+}
+
+.guesthouse-grid {
+  display: grid !important;
+  grid-template-columns: 1.06fr 0.94fr !important;
+  gap: 32px !important;
+  align-items: stretch !important;
+}
+
+.guesthouse-info-card {
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(201, 138, 46, 0.24) !important;
+  border-radius: 24px !important;
+  padding: 32px 34px !important;
+  box-shadow: 0 16px 44px rgba(7, 30, 40, 0.06), 0 2px 8px rgba(201, 138, 46, 0.08) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 20px !important;
+}
+
+.guesthouse-lead-desc {
+  font-size: 1.03rem !important;
+  line-height: 1.74 !important;
+  color: #1e2e35 !important;
+  margin: 0 !important;
+}
+
+.guesthouse-features-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 14px !important;
+}
+
+.guesthouse-feature-item {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  background: linear-gradient(135deg, rgba(201, 138, 46, 0.07), rgba(201, 138, 46, 0.02)) !important;
+  border: 1px solid rgba(201, 138, 46, 0.16) !important;
+  border-radius: 14px !important;
+  padding: 13px 15px !important;
+}
+
+.guesthouse-feature-icon {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  background: rgba(201, 138, 46, 0.14) !important;
+  color: #9c6818 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.guesthouse-feature-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.guesthouse-feature-text h4 {
+  font-size: 0.93rem !important;
+  font-weight: 750 !important;
+  color: #071e28 !important;
+  margin: 0 0 3px 0 !important;
+}
+
+.guesthouse-feature-text p {
+  font-size: 0.81rem !important;
+  color: #4e6068 !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+}
+
+.guesthouse-booking-box {
+  background: linear-gradient(135deg, rgba(0, 53, 128, 0.05), rgba(201, 138, 46, 0.07)) !important;
+  border: 1px solid rgba(0, 53, 128, 0.18) !important;
+  border-radius: 18px !important;
+  padding: 18px 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+}
+
+.guesthouse-rating-strip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+
+.booking-score-badge {
+  background: #003580 !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 2px !important;
+  font-weight: 800 !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 53, 128, 0.25) !important;
+}
+
+.booking-score-val {
+  font-size: 1.15rem !important;
+  line-height: 1 !important;
+}
+
+.booking-score-max {
+  font-size: 0.72rem !important;
+  opacity: 0.85 !important;
+}
+
+.booking-score-meta strong {
+  display: block !important;
+  font-size: 0.92rem !important;
+  color: #003580 !important;
+  font-weight: 750 !important;
+}
+
+.booking-score-meta span {
+  font-size: 0.8rem !important;
+  color: #4e6068 !important;
+  line-height: 1.35 !important;
+}
+
+.guesthouse-cta-row {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+.guesthouse-btn-wa {
+  flex: 1 1 200px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 18px !important;
+  font-size: 0.88rem !important;
+  font-weight: 750 !important;
+  border-radius: 100px !important;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.25) !important;
+  transition: all 0.25s ease !important;
+}
+
+.guesthouse-btn-wa:hover {
+  background: #20ba5a !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.35) !important;
+  color: #ffffff !important;
+}
+
+.guesthouse-btn-wa svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+.guesthouse-btn-booking {
+  flex: 1 1 200px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 12px 18px !important;
+  font-size: 0.88rem !important;
+  font-weight: 750 !important;
+  border-radius: 100px !important;
+  background: #003580 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(0, 53, 128, 0.25) !important;
+  transition: all 0.25s ease !important;
+}
+
+.guesthouse-btn-booking:hover {
+  background: #00224f !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(0, 53, 128, 0.35) !important;
+  color: #ffffff !important;
+}
+
+.guesthouse-btn-booking svg {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+.guesthouse-media-card {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+.guesthouse-hero-frame {
+  position: relative !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  aspect-ratio: 16 / 10.5 !important;
+  box-shadow: 0 16px 40px rgba(7, 30, 40, 0.12), 0 2px 8px rgba(201, 138, 46, 0.12) !important;
+  border: 1px solid rgba(201, 138, 46, 0.24) !important;
+  background: #071e28 !important;
+  cursor: pointer !important;
+}
+
+.guesthouse-hero-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.4s ease, opacity 0.25s ease !important;
+}
+
+.guesthouse-hero-frame:hover .guesthouse-hero-img {
+  transform: scale(1.03) !important;
+}
+
+.guesthouse-hero-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(to top, rgba(7, 30, 40, 0.85) 0%, rgba(7, 30, 40, 0.1) 45%, transparent 100%) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 16px 18px !important;
+  pointer-events: none !important;
+}
+
+.guesthouse-zoom-badge {
+  align-self: flex-end !important;
+  background: rgba(7, 30, 40, 0.72) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  color: #ffffff !important;
+  border-radius: 100px !important;
+  padding: 6px 14px !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+.guesthouse-zoom-badge:hover {
+  background: #c98a2e !important;
+  color: #ffffff !important;
+}
+
+.guesthouse-zoom-badge svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.guesthouse-img-caption {
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 650 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7) !important;
+}
+
+.guesthouse-thumbs-track {
+  display: grid !important;
+  grid-template-columns: repeat(9, 1fr) !important;
+  gap: 8px !important;
+}
+
+.guesthouse-thumb {
+  border: 2px solid transparent !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  aspect-ratio: 1 / 1 !important;
+  padding: 0 !important;
+  background: none !important;
+  cursor: pointer !important;
+  opacity: 0.62 !important;
+  transition: all 0.22s ease !important;
+}
+
+.guesthouse-thumb:hover {
+  opacity: 0.95 !important;
+  transform: translateY(-2px) !important;
+}
+
+.guesthouse-thumb.active {
+  opacity: 1 !important;
+  border-color: #c98a2e !important;
+  transform: scale(1.04) !important;
+  box-shadow: 0 3px 10px rgba(201, 138, 46, 0.35) !important;
+}
+
+.guesthouse-thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+@media (max-width: 992px) {
+  .guesthouse-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .guesthouse-thumbs-track {
+    display: flex !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    padding-bottom: 4px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .guesthouse-thumb {
+    flex: 0 0 74px !important;
+    height: 74px !important;
+    scroll-snap-align: start !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .guesthouse-section {
+    padding: 52px 0 !important;
+  }
+  .guesthouse-info-card {
+    padding: 20px 16px !important;
+    border-radius: 18px !important;
+  }
+  .guesthouse-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .guesthouse-booking-box {
+    padding: 14px 16px !important;
+  }
+  .guesthouse-cta-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .guesthouse-btn-wa,
+  .guesthouse-btn-booking {
+    width: 100% !important;
+  }
+  .guesthouse-hero-frame {
+    aspect-ratio: 4 / 3 !important;
+    border-radius: 16px !important;
+  }
+  .guesthouse-thumb {
+    flex: 0 0 62px !important;
+    height: 62px !important;
+  }
+}
