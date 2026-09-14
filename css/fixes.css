@@ -2624,3 +2624,26 @@ body, .hero-title, h1, h2, h3, h4, h5, h6, button, input, textarea, select {
   }
 }
 
+/* Navigation items display */
+@media (min-width: 901px) {
+  .nav-links {
+    display: flex !important;
+    align-items: center !important;
+    gap: 22px !important;
+  }
+  .nav-links li {
+    display: none !important;
+  }
+  .nav-links li.nav-item-home,
+  .nav-links li.nav-item-story,
+  .nav-links li.nav-item-stay,
+  .nav-links li.nav-item-reviews,
+  .nav-links li.nav-item-gallery,
+  .nav-links li.nav-item-contact {
+    display: inline-flex !important;
+  }
+}
+
+
+
+
