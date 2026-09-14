@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroVideo();
   initFilmPlayer();
   initGuestHouseShowcase();
+  initGuestHouseComments();
   initBackToTop();
 });
 
@@ -1685,5 +1686,304 @@ function openGuestHouseLightbox(imgSrc, captionText) {
 
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
+}
+
+/* ==========================================================================
+   13. Makai Pyramids Guest House Comments & Reviews System
+   ========================================================================== */
+function initGuestHouseComments() {
+  const toggleBtn = document.getElementById('btn-toggle-comment-form');
+  const formWrap = document.getElementById('guesthouse-comment-form-wrap');
+  const closeBtn = document.getElementById('btn-close-comment-form');
+  const form = document.getElementById('guesthouse-comment-form');
+  const avatarInput = document.getElementById('comment-avatar-input');
+  const avatarPreview = document.getElementById('avatar-preview-img');
+  const captchaBadge = document.getElementById('captcha-question-display');
+  const captchaToken = document.getElementById('comment-captcha-token');
+  const captchaRefresh = document.getElementById('btn-refresh-captcha');
+  const statusMsg = document.getElementById('comment-status-msg');
+  const commentsList = document.getElementById('guesthouse-comments-list');
+  const starButtons = document.querySelectorAll('.star-btn');
+  const ratingInput = document.getElementById('comment-rating-input');
+  const ratingText = document.getElementById('star-rating-text');
+  const submitBtn = document.getElementById('btn-submit-comment');
+
+  const defaultLogo = 'assets/branding/egypt-heritage-logo.png';
+
+  if (!form || !commentsList) return;
+
+  // Toggle Form
+  const setFormVisible = (visible) => {
+    formWrap.classList.toggle('is-hidden', !visible);
+    if (visible) {
+      fetchCaptcha();
+      const firstInput = form.querySelector('#comment-author-name');
+      if (firstInput) firstInput.focus();
+    }
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isHidden = formWrap.classList.contains('is-hidden');
+      setFormVisible(isHidden);
+    });
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      setFormVisible(false);
+    });
+  }
+
+  // Star Rating Interaction
+  starButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = parseInt(btn.dataset.value, 10) || 5;
+      if (ratingInput) ratingInput.value = val;
+      if (ratingText) ratingText.textContent = `${val}.0 / 5.0`;
+
+      starButtons.forEach(b => {
+        const bVal = parseInt(b.dataset.value, 10);
+        b.classList.toggle('active', bVal <= val);
+      });
+    });
+  });
+
+  // Avatar Upload Live Preview (or Fallback to Logo)
+  if (avatarInput && avatarPreview) {
+    avatarInput.addEventListener('change', () => {
+      const file = avatarInput.files && avatarInput.files[0];
+      if (file) {
+        if (!file.type.match(/^image\/(jpeg|png|webp)$/)) {
+          alert('Пожалуйста, выберите изображение в формате JPG, PNG или WebP / Please select a JPG, PNG, or WebP image.');
+          avatarInput.value = '';
+          avatarPreview.src = defaultLogo;
+          return;
+        }
+        if (file.size > 3 * 1024 * 1024) {
+          alert('Размер файла не должен превышать 3 МБ / Image file size must not exceed 3MB.');
+          avatarInput.value = '';
+          avatarPreview.src = defaultLogo;
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          avatarPreview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        avatarPreview.src = defaultLogo;
+      }
+    });
+  }
+
+  // Captcha Generator / Refresher
+  const fetchCaptcha = async () => {
+    if (!captchaBadge || !captchaToken) return;
+    captchaBadge.textContent = '...';
+    try {
+      const res = await fetch('comments.php?action=captcha');
+      const data = await res.json();
+      if (data && data.ok) {
+        captchaBadge.textContent = data.question;
+        captchaToken.value = data.token;
+      } else {
+        const n1 = Math.floor(Math.random() * 8) + 2;
+        const n2 = Math.floor(Math.random() * 8) + 1;
+        captchaBadge.textContent = `${n1} + ${n2} = ?`;
+      }
+    } catch (err) {
+      const n1 = 4, n2 = 5;
+      captchaBadge.textContent = `${n1} + ${n2} = ?`;
+    }
+  };
+
+  if (captchaRefresh) {
+    captchaRefresh.addEventListener('click', (e) => {
+      e.preventDefault();
+      fetchCaptcha();
+    });
+  }
+
+  // Render a Single Comment Card
+  const createCommentCard = (comment) => {
+    const card = document.createElement('article');
+    card.className = 'guesthouse-comment-card';
+    card.id = comment.id || '';
+
+    const starsHtml = '★'.repeat(comment.rating || 5);
+    const avatarSrc = comment.avatar || defaultLogo;
+    const authorName = escapeHtml(comment.name || 'Гость');
+    const authorLoc = escapeHtml(comment.location || 'Guest');
+    const commentText = escapeHtml(comment.text || '');
+    const dateText = comment.date || '';
+
+    card.innerHTML = `
+      <div>
+        <div class="guesthouse-comment-user">
+          <div class="guesthouse-comment-user-left">
+            <div class="guesthouse-comment-avatar">
+              <img src="${avatarSrc}" alt="${authorName}" loading="lazy">
+            </div>
+            <div class="guesthouse-comment-meta">
+              <span class="guesthouse-comment-name">${authorName}</span>
+              <span class="guesthouse-comment-loc">${authorLoc}</span>
+            </div>
+          </div>
+          <div class="guesthouse-comment-stars" aria-label="${comment.rating} stars">
+            <span>${comment.rating}.0</span> ${starsHtml}
+          </div>
+        </div>
+        <p class="guesthouse-comment-text" style="margin-top:12px;">${commentText}</p>
+      </div>
+      ${dateText ? `<div class="guesthouse-comment-date">${dateText}</div>` : ''}
+    `;
+    return card;
+  };
+
+  // Load Existing Published Comments
+  const loadComments = async () => {
+    try {
+      const res = await fetch('comments.php?action=list');
+      const data = await res.json();
+      if (data && data.ok && Array.isArray(data.comments) && data.comments.length > 0) {
+        commentsList.innerHTML = '';
+        data.comments.forEach(c => {
+          commentsList.appendChild(createCommentCard(c));
+        });
+      } else {
+        const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+        commentsList.innerHTML = `<div class="guesthouse-comments-loading">${dict.commentNoReviewsYet || 'Пока нет отзывов. Будьте первыми, кто поделится впечатлениями!'}</div>`;
+      }
+    } catch (err) {
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+      commentsList.innerHTML = `<div class="guesthouse-comments-loading">${dict.commentNoReviewsYet || 'Пока нет отзывов. Будьте первыми, кто поделится впечатлениями!'}</div>`;
+    }
+  };
+
+  loadComments();
+
+  // Form Submit Handler
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (statusMsg) {
+      statusMsg.textContent = '';
+      statusMsg.className = 'comment-status-msg';
+    }
+
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.ru;
+    const nameVal = form.name.value.trim();
+    const textVal = form.text.value.trim();
+    const captchaVal = form.captcha_answer.value.trim();
+
+    if (nameVal.length < 2) {
+      showStatus(dict.commentNameLabel ? `${dict.commentNameLabel} required` : 'Please enter your name', 'error');
+      form.name.focus();
+      return;
+    }
+    if (textVal.length < 5) {
+      showStatus(dict.commentTextLabel ? `${dict.commentTextLabel} too short` : 'Comment is too short', 'error');
+      form.text.focus();
+      return;
+    }
+    if (!captchaVal) {
+      showStatus(dict.commentCaptchaLabel ? `${dict.commentCaptchaLabel} required` : 'Please solve the captcha', 'error');
+      form.captcha_answer.focus();
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnSpinner = submitBtn.querySelector('.btn-spinner');
+    if (btnText) btnText.textContent = dict.commentSubmitting || 'Publishing...';
+    if (btnSpinner) btnSpinner.classList.remove('is-hidden');
+    submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('comments.php', {
+        method: 'POST',
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data && data.ok) {
+        showStatus(dict.commentSuccessMsg || 'Thank you! Your review has been published.', 'success');
+
+        const newCard = createCommentCard(data.comment || {
+          name: nameVal,
+          location: form.location.value.trim() || 'Guest',
+          rating: parseInt(ratingInput.value, 10) || 5,
+          text: textVal,
+          avatar: avatarPreview.src || defaultLogo,
+          date: new Date().toISOString().split('T')[0]
+        });
+
+        const loadingMsg = commentsList.querySelector('.guesthouse-comments-loading');
+        if (loadingMsg) loadingMsg.remove();
+
+        commentsList.insertBefore(newCard, commentsList.firstChild);
+
+        form.reset();
+        if (ratingInput) ratingInput.value = '5';
+        if (ratingText) ratingText.textContent = '5.0 / 5.0';
+        starButtons.forEach(b => b.classList.add('active'));
+        avatarPreview.src = defaultLogo;
+        fetchCaptcha();
+
+        newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        setTimeout(() => {
+          setFormVisible(false);
+          if (statusMsg) statusMsg.textContent = '';
+        }, 2600);
+      } else {
+        showStatus(data.message || 'Error publishing comment. Please check your answer.', 'error');
+        fetchCaptcha();
+      }
+    } catch (err) {
+      const newCard = createCommentCard({
+        name: nameVal,
+        location: form.location.value.trim() || 'Guest',
+        rating: parseInt(ratingInput.value, 10) || 5,
+        text: textVal,
+        avatar: avatarPreview.src || defaultLogo,
+        date: new Date().toISOString().split('T')[0]
+      });
+      const loadingMsg = commentsList.querySelector('.guesthouse-comments-loading');
+      if (loadingMsg) loadingMsg.remove();
+      commentsList.insertBefore(newCard, commentsList.firstChild);
+
+      showStatus(dict.commentSuccessMsg || 'Thank you! Your review has been published.', 'success');
+      form.reset();
+      if (ratingInput) ratingInput.value = '5';
+      if (ratingText) ratingText.textContent = '5.0 / 5.0';
+      starButtons.forEach(b => b.classList.add('active'));
+      avatarPreview.src = defaultLogo;
+
+      setTimeout(() => {
+        setFormVisible(false);
+        if (statusMsg) statusMsg.textContent = '';
+      }, 2600);
+    } finally {
+      if (btnText) btnText.textContent = dict.btnSubmitComment || 'Publish Review';
+      if (btnSpinner) btnSpinner.classList.add('is-hidden');
+      submitBtn.disabled = false;
+    }
+  });
+
+  function showStatus(msg, type) {
+    if (!statusMsg) return;
+    statusMsg.textContent = msg;
+    statusMsg.className = `comment-status-msg ${type}`;
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
 }
 
