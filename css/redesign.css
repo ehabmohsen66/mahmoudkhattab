@@ -212,13 +212,6 @@ textarea:focus-visible {
   gap: 26px;
 }
 
-.nav-links li:nth-child(2),
-.nav-links li:nth-child(3),
-.nav-links li:nth-child(6),
-.nav-links li:nth-child(8) {
-  display: none;
-}
-
 .nav-link {
   color: var(--text-secondary);
   font-size: 0.78rem;
