@@ -38,8 +38,9 @@ Options +FollowSymLinks
   # Strip trailing slash from /en/ and /zh/ for clean URLs
   RewriteRule ^(en|zh)/$ /$1 [R=301,L]
 
-  # Prevent sub-path asset 404s if accessed under /en/ or /zh/
+  # Prevent sub-path asset and API 404s if accessed under /en/ or /zh/
   RewriteRule ^(en|zh)/(css|js|assets|components)/(.+)$ $2/$3 [L]
+  RewriteRule ^(en|zh)/(comments\.php|contact\.php)(.*)$ $2$3 [L]
 
   # Serve index.html for /en and /zh
   RewriteRule ^(en|zh)$ index.html [L,QSA]

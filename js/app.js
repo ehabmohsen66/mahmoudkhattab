@@ -1783,7 +1783,7 @@ function initGuestHouseComments() {
     if (!captchaBadge || !captchaToken) return;
     captchaBadge.textContent = '...';
     try {
-      const res = await fetch('comments.php?action=captcha');
+      const res = await fetch('/comments.php?action=captcha');
       const data = await res.json();
       if (data && data.ok) {
         captchaBadge.textContent = data.question;
@@ -1845,7 +1845,7 @@ function initGuestHouseComments() {
   // Load Existing Published Comments
   const loadComments = async () => {
     try {
-      const res = await fetch('comments.php?action=list');
+      const res = await fetch('/comments.php?action=list');
       const data = await res.json();
       if (data && data.ok && Array.isArray(data.comments) && data.comments.length > 0) {
         commentsList.innerHTML = '';
@@ -1903,7 +1903,7 @@ function initGuestHouseComments() {
     submitBtn.disabled = true;
 
     try {
-      const res = await fetch('comments.php', {
+      const res = await fetch('/comments.php', {
         method: 'POST',
         body: formData
       });
